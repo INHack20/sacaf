@@ -1,0 +1,15 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 align='center' class="textoDecorado">Mobiliarios</h1>
+<br/><br/>
+    {% include 'INHack20MobiliarioBundle:Mobiliario:formBuscar.html.twig' %}
+<br/>
+<div id="result-busqueda">
+    {% include 'INHack20MobiliarioBundle:Mobiliario:lista.html.twig' %}
+</div>   
+<br/><br/><br/>
+{% endblock%}

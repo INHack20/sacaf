@@ -1,0 +1,49 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block fos_user_content %}
+<h1 class="textoDecorado">Cuentas de usuarios</h1>
+<table border="1" align="center" class="tabla-1" >
+  <thead>
+    <tr>
+        <th>Usuario</th>
+        <th>Email</th>
+        <th>Nombre Completo</th>
+        <th>Estado</th>
+        <th>Estatus</th>
+        <th></th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.username }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.nombrecompleto }}</td>
+            <td>{% if usuario.estado %}{{ usuario.estado.descripcion }}{% endif %}</td>
+            <td>{% if usuario.isEnabled %}
+                    <font color="green">Activada</font>
+                {%else%}
+                    <font color="red">Desactivada</font>
+                {% endif %}
+            </td>
+            <td>{% if usuario.locked %}
+                    <img src="{{ asset('bundles/inhack20inventario/images/bloqueado.png') }}" width="24" height="24" />
+                {%else%}
+                    <img src="{{ asset('bundles/inhack20inventario/images/desbloqueado.png') }}" width="24" height="24" />
+                {% endif %}
+            </td>
+            <td><a class="ajaxContenido" href="{{ path('fos_user_ver_usuario', { 'id': usuario.id }) }}">
+                      <img src="{{ asset('bundles/inhack20inventario/images/usuario.jpg') }}" width="24" height="24" alt="Ver" />
+                  Ver</a>
+            </td>
+        </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock fos_user_content %}
+
+

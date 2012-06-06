@@ -1,0 +1,159 @@
+<script type="text/javascript">
+$(document).ready(function($){
+	$('#mega-menu-7').dcMegaMenu({
+		rowItems: '3',
+		speed: 'fast',
+		effect: 'slide'
+	});
+
+});
+</script>
+
+
+<div class="green">  
+<ul id="mega-menu-7" class="mega-menu">
+	<li><a href="{{ path('_principal') }}">Inicio</a></li>
+	<li><a href="#a">Operaciones</a>
+		<ul>
+			<li><a href="#a">Comprobante De Entrega</a>
+				<ul>
+					<li><a class="ajaxMenuContenido" href="{{ path('comprobante_new', { 'tipo' : COMPROBANTE_ENTREGA, 'menu' : '1' }) }}">Registrar</a></li>
+                                        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_ENTREGA, 'menu' : '1' }) }}">Modificar/Eliminar</a></li>					
+				</ul>
+			</li>
+			<li><a href="#a">Comprobante De Reasignaci&oacute;n</a>
+			    <ul>
+					<li><a class="ajaxMenuContenido" href="{{ path('comprobante_new', { 'tipo' : COMPROBANTE_REASIGNACION, 'menu' : '1' }) }}">Registrar</a></li>
+                                        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_REASIGNACION, 'menu' : '1'  }) }}">Modificar/Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Comprobante De Desincorporaci&oacute;n</a>
+			    <ul>
+					<li><a class="ajaxMenuContenido" href="{{ path('comprobante_new', { 'tipo' : COMPROBANTE_DESINCORPORACION, 'menu' : '1' } ) }}">Registrar</a></li>
+                                        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_DESINCORPORACION, 'menu' : '1' }) }}">Modificar/Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Orden</a>
+			    <ul>
+					<li><a class="ajaxMenuContenido" href="{{ path('orden_new',{ 'menu' : '1','accion' : OPERACIONES }) }}">Registrar</a></li>
+					<li><a class="ajaxMenuContenido" href="{{ path('orden',{ 'menu' : '1','accion' : OPERACIONES }) }}">Modificar/Eliminar</a></li>
+				</ul>
+			</li>
+			<li><a href="#">Mobiliario</a>
+			  <ul>
+				
+					<li><a class="ajaxMenuContenido" href="{{ path('mobiliario_new',{ 'menu' : '1','accion' : OPERACIONES }) }}">Registrar</a></li>
+					<li><a class="ajaxMenuContenido" href="{{ path('mobiliario',{ 'menu' : '1','accion' : OPERACIONES }) }}">Modificar/Eliminar</a></li>
+			  </ul>
+			</li>
+			<li><a href="#">Equipo</a>
+			  <ul>
+				
+					<li><a class="ajaxMenuContenido" href="{{ path('equipo_new',{ 'menu' : '1','accion' : OPERACIONES }) }}">Registrar</a></li>
+					<li><a class="ajaxMenuContenido" href="{{ path('equipo',{ 'menu' : '1','accion' : OPERACIONES }) }}">Modificar/Eliminar</a></li>
+			  </ul>
+			</li>
+			
+		</ul>
+	</li>
+	<li><a href="#">Consultas</a>
+    <ul>
+        <li><a href="#">Comprobantes</a>
+            <ul>
+                    <li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : CONSULTAS ,'tipo' : COMPROBANTE_ENTREGA, 'menu' : '1' }) }}">Entrega</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : CONSULTAS ,'tipo' : COMPROBANTE_REASIGNACION, 'menu' : '1' }) }}">Reasignaci&oacute;n</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : CONSULTAS ,'tipo' : COMPROBANTE_DESINCORPORACION, 'menu' : '1' }) }}">Desincorporaci&oacute;n</a></li>
+            </ul>
+	</li>
+            
+	<li><a href="#">Mobiliarios</a>
+            <ul>
+                    <li><a class="ajaxMenuContenido" href="{{ path('mobiliario',{ 'menu' : '1', 'estatus' : STOCK_ALMACEN, 'accion' : CONSULTAS }) }}">Stock Almacen</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('mobiliario',{ 'menu' : '1', 'estatus' : DESINCORPORADO, 'accion' : CONSULTAS }) }}">Deposito</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('mobiliario',{ 'menu' : '1', 'accion' : CONSULTAS }) }}">Todos</a></li>
+
+            </ul>
+        </li>
+        
+	<li><a href="#">Equipos</a>
+            <ul>
+                    <li><a class="ajaxMenuContenido" href="{{ path('equipo',{ 'menu' : '1', 'estatus' : STOCK_ALMACEN, 'accion' : CONSULTAS }) }}">Stock Almacen</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('equipo',{ 'menu' : '1', 'estatus' : DESINCORPORADO, 'accion' : CONSULTAS }) }}">Deposito</a></li>
+                    <li><a class="ajaxMenuContenido" href="{{ path('equipo',{ 'menu' : '1', 'accion' : CONSULTAS }) }}">Todos</a></li>
+
+            </ul>
+        </li>
+	
+    </ul>
+</li>
+<li><a href="#">Reportes</a>
+<ul>
+	<li><a href="#">Comprobantes</a>
+	<ul>
+		<li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : REPORTES ,'tipo' : COMPROBANTE_ENTREGA, 'menu' : '1' }) }}">Entrega</a></li>
+		<li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : REPORTES ,'tipo' : COMPROBANTE_REASIGNACION, 'menu' : '1' }) }}">Reasignaci&oacute;n</a></li>
+		<li><a class="ajaxMenuContenido" href="{{ path('comprobante', { 'accion' : REPORTES ,'tipo' : COMPROBANTE_DESINCORPORACION, 'menu' : '1' }) }}">Desincorporaci&oacute;n</a></li>
+	</ul>
+	</li>
+        <li><a href="#">Mobiliarios</a>
+            <ul>
+                <li><a target="_blank" href="{{ path("activo_reporte",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_MOBILIARIO,'estatus' : STOCK_ALMACEN }) }}">Stock Almacen</a></li>
+                <li><a target="_blank" href="{{ path("activo_reporte",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_MOBILIARIO,'estatus' : DESINCORPORADO }) }}">Deposito</a></li>
+                <li><a class="ajaxMenuContenido" href="{{ path("activo_inventario",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_MOBILIARIO }) }}">Inventario</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Equipos</a>
+            <ul>
+                <li><a target="_blank" href="{{ path("activo_reporte",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_EQUIPO,'estatus' : STOCK_ALMACEN }) }}">Stock Almacen</a></li>
+                <li><a target="_blank" href="{{ path("activo_reporte",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_EQUIPO,'estatus' : DESINCORPORADO }) }}">Deposito</a></li>
+                <li><a class="ajaxMenuContenido" href="{{ path("activo_inventario",{ 'menu' : '1', 'accion' : REPORTES, 'tipoActivo' : ACTIVO_EQUIPO }) }}">Inventario</a></li>
+            </ul>
+        </li>
+
+</ul>
+</li>
+<li><a href="#">Herramientas</a>
+<ul>
+	<li><a href="#">Usuario</a>
+	<ul>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li><a href="{{ path('fos_user_registration_register') }}">Registrar</a></li>
+                {% endif %}
+		<li><a href="{{ path('fos_user_profile_edit') }}">Actualizar Datos</a></li>
+                <li><a href="{{ path('fos_user_change_password') }}">Cambiar Contrase&ntilde;a</a></li>
+                {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li><a href="{{ path('fos_user_lista_usuarios') }}">Ver Todos</a></li>
+                {% endif %}
+	</ul>
+        </li>
+        <li><a href="#">Ubicaci&oacute;n</a>
+            <ul>
+                <li><a class="ajaxMenuContenido" href="{{ path('ubicacion_new',{ 'menu' : '1' }) }}">Registrar</a></li>
+		<li><a class="ajaxMenuContenido" href="{{ path('ubicacion',{ 'menu' : '1' }) }}">Modificar/Eliminar</a></li>
+            </ul>
+	</li>
+	<li><a href="#">Firma</a>
+            <ul>
+                <li><a class="ajaxMenuContenido" href="{{ path('firma_new',{ 'menu' : '1' }) }}">Registrar</a></li>
+                <li><a class="ajaxMenuContenido" href="{{ path('firma',{ 'menu' : '1' }) }}">Modificar/Eliminar</a></li>
+            </ul>
+	</li>
+        <li><a href="#">Tipos de Equipos</a>
+                <ul>
+                        <li><a class="ajaxMenuContenido" href="{{ path('tipoequipo_new',{ 'menu' : '1' }) }}">Registrar</a></li>
+                        <li><a class="ajaxMenuContenido" href="{{ path('tipoequipo',{ 'menu' : '1' }) }}">Modificar/Eliminar</a></li>
+                </ul>
+        </li>
+        <li><a href="#">Tipos de Componentes</a>
+                <ul>
+                        <li><a class="ajaxMenuContenido" href="{{ path('tipocomponente_new',{ 'menu' : '1' }) }}">Registrar</a></li>
+                        <li><a class="ajaxMenuContenido"href="{{ path('tipocomponente',{ 'menu' : '1' }) }}">Modificar/Eliminar</a></li>
+                </ul>
+        </li>
+	
+	
+</ul>
+</li>
+<li><a href="{{ path('fos_user_security_logout') }}">Cerrar Sesi&oacute;n</a></li>
+</ul>
+</div>

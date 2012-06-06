@@ -1,0 +1,17 @@
+.textoDecorado {
+ font-size: 20pt;
+ font-family: 'Bookman Old Style', serif;
+ color: #56A101;
+ 
+ text-align: center;
+ font-weight: bold;
+ text-transform: capitalize;
+ word-spacing: 1px;
+}
+label {
+ font-size: 12px;
+ font-family: 'Bookman Old Style', serif;
+ color: #797979;
+ font-weight: bold;
+ word-spacing: 1px;
+}

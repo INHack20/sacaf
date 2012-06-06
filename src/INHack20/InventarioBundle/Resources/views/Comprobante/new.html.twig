@@ -1,0 +1,59 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Creaci&oacute;n de Comprobante{% endblock%}
+
+{% block contenido %}
+<h1 class="textoDecorado">
+    {% if entity.tipo == COMPROBANTE_ENTREGA %}
+        Comprobante de Entrega
+    {% elseif entity.tipo == COMPROBANTE_REASIGNACION %}
+        Comprobante de Reasignaci&oacute;n
+    {% elseif entity.tipo == COMPROBANTE_DESINCORPORACION %}
+        Comprobante de Desincorporaci&oacute;n
+    {% endif %}
+</h1>
+<br/><br/>
+
+<form id="frmRegistrar" class="tabla-2" action="{{ path('comprobante_create') }}" method="post" {{ form_enctype(form) }}>
+        {{ form_row(form._token) }}           
+        {{ form_row(form.tipo) }}           
+    <table width="620" border="0" align="center" cellpadding="2" cellspacing="2">
+                    
+                    <tr>
+                      <th colspan="2" bgcolor="#CCCCCC">DEPENDENCIA USUARIA</th>
+                    </tr>
+                    <tr>
+                        <td class="field" colspan="2">{{ form_row(form.ubicacion) }}</td>
+                        
+                    </tr>
+                    <tr>
+                      <th colspan="2" bgcolor="#CCCCCC">ALMACEN</th>
+                    </tr>
+                    <tr>
+                        <td class="field">{{ form_row(form.almacen_codigo) }}</td>
+                        <td class="field">{{ form_row(form.almacen_denominacion) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="field">{{ form_row(form.almacen_resp_ci)}}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="field">{{ form_row(form.almacen_resp_apell_nom) }}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="field">{{ form_row(form.tipoactivo) }}</td>
+                    </tr>
+                        
+                  </table>
+                    <br/>
+                    <table align='center'>
+                           <tr>
+                              <td class="field">{{ form_row(form.nota) }}</td>
+                           </tr>
+                    </table>
+                    {{ form_rest(form) }}
+    <br/><br/>
+    <p align='center'>
+        <button type="submit" class="miBoton" >Crear</button>
+    </p>
+</form>
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+{% endblock %}

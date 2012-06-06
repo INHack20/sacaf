@@ -1,0 +1,14 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}A&ntilde;adir Firma{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">A&ntilde;adir Firma</h1>
+<br/><br/>
+<form id="frmRegistrar" action="{{ path('firma_create',{ 'id' : id, 'id_comprobante' : id_comprobante }) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <br/><br/>
+    <p align="center">
+        <button type="submit" class="miBoton">A&ntilde;adir</button>
+    </p>
+</form>
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+{% endblock %}

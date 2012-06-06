@@ -1,0 +1,38 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block titulo %}
+    Tipo de Componente
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Editar Tipo de Componente</h1>
+<br/><br/>
+<form id="frmEditar" action="{{ path('tipocomponente_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    {{ form_widget(edit_form, { 'attr' : { 'align' : 'center' } }) }}
+     <br/>
+    <br/>
+    <table width="100%" border="0">
+        <tr>
+            <td>
+                <button id="guardar" class="miBoton">
+                    <img src="{{ asset('bundles/inhack20inventario/images/guardar.png') }}" width="24" height="24" alt="Guardar" />
+                    Guardar Cambios
+                </button>
+            </td>
+            <td>
+                <button id="btnEliminar" class="miBoton" type="button">
+                                <img src="{{ asset('bundles/inhack20inventario/images/eliminar.png') }}" width="24" height="24" alt="Eliminar" />
+                                Eliminar</button>
+                </td>
+        </tr>
+    </table>
+</form>
+
+<form id="frmEliminar" action="{{ path('tipocomponente_delete', { 'id': entity.id }) }}" method="post">
+    {{ form_widget(delete_form) }}
+</form>
+<br/><br/>
+{% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig' %}
+{% endblock %}

@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>
+    {% block titulo %}
+        SACAF - DEM
+    {% endblock %}
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+{# Base css #}
+<link href="{{ asset('bundles/inhack20inventario/css/base.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('bundles/inhack20inventario/css/cargando.css') }}" rel="stylesheet" type="text/css" />
+
+{% block css %}
+<link rel="stylesheet" href="{{ asset("bundles/inhack20inventario/css/temaCalendario/jquery-ui-1.8.20.custom.css") }}" />
+<link rel="stylesheet" href="{{ asset("bundles/inhack20inventario/css/temaCalendario/jquery.ui.all.css") }}" />
+
+<link href="{{ asset("bundles/inhack20inventario/css/texto.css") }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("bundles/makerlabspager/css/clean.css") }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.bgiframe.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery-ui-1.8.20.custom.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.dialog.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.draggable.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.droppable.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.resizable.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.selectable.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.sortable.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.position.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.ui.mouse.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.effects.core.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.effects.explode.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.effects.blind.min.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/funciones.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.form.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.validate.js") }}"></script>
+<script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.autocomplete.js") }}"></script>
+<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+
+
+<!-- Calendario -->
+                
+                <script src="{{ asset("bundles/inhack20inventario/js/jquery.ui.core.min.js") }}"></script>
+                <script src="{{ asset("bundles/inhack20inventario/js/jquery.ui.widget.min.js") }}"></script>
+                <script src="{{ asset("bundles/inhack20inventario/js/idiomas/jquery.ui.datepicker-es.js") }}"></script>
+                <script src="{{ asset("bundles/inhack20inventario/js/jquery.ui.datepicker.min.js") }}"></script>
+                
+                <link rel="stylesheet" href="{{ asset("bundles/inhack20inventario/css/boton.css") }}" />
+{# menu #}
+<link href="{{ asset("bundles/inhack20inventario/css/dcmegamenu.css") }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset("bundles/inhack20inventario/css/skins/green.css") }}" rel="stylesheet" type="text/css" />
+<script type='text/javascript' src='{{ asset("bundles/inhack20inventario/js/jquery.hoverIntent.minified.js") }}'></script>
+<script type='text/javascript' src='{{ asset("bundles/inhack20inventario/js/jquery.dcmegamenu.1.3.3.js") }}'></script>
+
+
+</head>
+<body>
+<div id="container">
+  <div id="banner">
+      <br/><br/>
+    
+  </div>
+  <div>
+    {% include 'INHack20InventarioBundle:Principal:menus.html.twig' %}
+  </div>
+  <div class="clear">&nbsp;</div>
+  <div id="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      {% block barralateral %}
+        <li><a href="{{ path('_principal') }}">Inicio</a></li>
+        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_ENTREGA, 'menu' : '1' }) }}">Comprobante Entrega</a></li>
+        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_REASIGNACION, 'menu' : '1'  }) }}">Comprobante Reasignaci&oacute;n</a></li>
+        <li><a class="ajaxMenuContenido" href="{{ path('comprobante', {'accion' : OPERACIONES ,'tipo' :  COMPROBANTE_DESINCORPORACION, 'menu' : '1' }) }}">Comprobante Desincorporaci&oacute;n</a></li>
+        <li><a class="ajaxMenuContenido" href="{{ path('orden',{ 'menu' : '1','accion' : OPERACIONES }) }}">Orden</a></li>
+      {% endblock %}
+    </ul>
+    {#
+        <h2>Historial</h2>
+        <ul>
+        <li><a href="#">April 2007</a></li>
+        <li><a href="#">March 2007</a></li>
+        <li><a href="#">Feb 2007</a></li>
+        <li><a href="#">Jan 2007</a></li>
+        <li><a href="#">Dec 2006</a></li>
+        <li><a href="#">Nov 2006</a></li>
+        </ul>    
+     #}
+  </div>
+  <div id="content">
+      <div id="cargando" >
+                 Por Favor, Espere... <img src="{{ asset("bundles/inhack20inventario/images/cargando.gif") }}" width="24" height="24" />
+      </div>
+      <div id="contenido">
+      {% block contenido %}
+        {% include 'INHack20InventarioBundle:Principal:inicio.html.twig' %}
+     {% endblock %}
+     </div>
+    <div id="capa_f_negro_pop"></div>
+  </div>
+  {% block dialogo %}
+        <style type="text/css">
+                        div#dialog-form { font-size: 62.5%; }
+                        label, input { display:block; }
+                        input.text { margin-bottom:12px; width:95%; padding: .4em; }
+                        fieldset { padding:0; border:0; margin-top:25px; }
+                        h1 { font-size: 1.2em; margin: .6em 0; }
+                        div#users-contain { width: 350px; margin: 20px 0; }
+                        div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+                        div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+                        .ui-dialog .ui-state-error { padding: .3em; }
+                        .validateTips { border: 1px solid transparent; padding: 0.3em; }
+
+        </style>
+        <script type="text/javascript">
+                $(function() {
+                        // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+                        $( "#dialog:ui-dialog" ).dialog( "destroy" );
+                        $.fx.speeds._default = 1000;
+                        $( "#dialogo" ).dialog({
+                                autoOpen: false,
+                                height: 400,
+                                width: 850,
+                                modal: true,
+                                show: "blind",
+                                hide: "explode",
+                                close: function(e) {
+                                        e.preventDefault();
+                                        
+                                }
+                        });
+
+                        
+                    function cargar()
+                    {
+                        cargando();
+                    }
+                    function listo(){listoCargado();};
+                    //clases para manejar ajax
+                    $(".ajaxMenuContenido").click(function(e){
+                        e.preventDefault();
+                            cargando();
+                            $("#contenido").load($(this).attr('href'),function(response, status, xhr){
+                                if (status == "error") {
+                                    var msg = "Lo siento ha ocurrido un error: ";
+                                    //$("#contenido").html(msg + xhr.status + " " + xhr.statusText);
+                                    $("#contenido").html(response);
+                                    //url = "http://taller-de-scripts.com.ar";  
+                                    //$(location).attr('href',url)
+                                    //return "oh noes!!!!";
+                                }
+                                listoCargado();
+                             });
+                    });
+                });
+        </script>
+        <div id="dialogo" title="SACAF">
+            <div id="dialogo-contenido"></div>
+            <div id="diagolo-busqueda"></div>
+        </div>
+  {% endblock %}
+  {% block javascripts %}{% endblock %}
+  <div class="clear">&nbsp;</div>
+  <div id="footer">{% block pie %}
+		<p>SACAF v1.0 Copyleft 2011-2012<br/>Desarrollado por: Br. Carlos Mendoza</p>
+  {% endblock %}
+  </div>
+</div>
+</body>
+</html>

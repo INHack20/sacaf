@@ -1,0 +1,101 @@
+imports:
+    - { resource: parameters.ini }
+    - { resource: variables.yml }
+    - { resource: security.yml }
+    - { resource:  '@INHack20UserBundle/Resources/config/services.yml' }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    charset:         UTF-8
+    router:          { resource: "%kernel.root_dir%/config/routing.yml" }
+    form:            true
+    csrf_protection: true
+    validation:      { enable_annotations: true }
+    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    session:
+        default_locale: %locale%
+        auto_start:     true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+      resources: ['form_table_layout.html.twig']
+    globals:
+      #Tipo de comprobantes
+      COMPROBANTE_ENTREGA : %COMPROBANTE_ENTREGA%
+      COMPROBANTE_REASIGNACION : %COMPROBANTE_REASIGNACION%
+      COMPROBANTE_DESINCORPORACION : %COMPROBANTE_DESINCORPORACION%
+      #Tipo de Activos
+      ACTIVO_MOBILIARIO : %ACTIVO_MOBILIARIO%
+      ACTIVO_EQUIPO : %ACTIVO_EQUIPO%
+      #Estatus del activo
+      STOCK_ALMACEN : %STOCK_ALMACEN%
+      ASIGNADO : %ASIGNADO%
+      REASIGNADO : %REASIGNADO%
+      DESINCORPORADO : %DESINCORPORADO%
+      #Acciones a realizar
+      OPERACIONES : %OPERACIONES%
+      CONSULTAS : %CONSULTAS%
+      REPORTES : %REPORTES%
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ ]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        #yui_css:
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+
+    orm:
+        auto_generate_proxy_classes: %kernel.debug%
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: INHack20\UserBundle\Entity\User
+    registration:
+        form:
+            type: inhack20_user_registration
+    profile:
+        form:
+            type: inhack20_user_profile
+    service:
+        mailer: fos_user.mailer.default
+        
+    from_email:
+        address:        inhack20@gmail.com
+        sender_name:    Ing. Carlos Mendoza
+        
+    resetting:
+        email:
+            from_email:
+                address:        inhack20@gmail.com
+                sender_name:    Ing. Carlos Mendoza

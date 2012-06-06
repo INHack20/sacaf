@@ -1,0 +1,19 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1>Componentes</h1>
+
+<div id="result-busqueda">
+    {% include 'INHack20EquipoBundle:Componente:lista.html.twig' with { 'equipo_id' : 0 }%}
+</div> 
+<br/><br/>
+<a href="{{ path('componente_new') }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                 A&ntilde;adir
+            </button>
+</a>  
+{% endblock %}

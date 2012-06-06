@@ -1,0 +1,79 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Mobiliario{% endblock%}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 align='center' class="textoDecorado">Mobiliario</h1>
+<br/><br/>
+<table align='center' class="record_properties tabla-1">
+    <tbody>
+        <tr>
+            <td><b>N&deg; Bien Nacional</b></td>
+            <td>{{ entity.activo.nroBienNacional }}</td>
+        </tr>
+        <tr>
+            <td><b>C&oacute;digo del catalogo</b></td>
+            <td>{{ entity.codigocatalogo }}</td>
+        </tr>
+        <tr>
+            <td><b>U.T.</b></td>
+            <td>{{ entity.unidadtributaria }}</td>
+        </tr>
+        <tr>
+            <td><b>Descripci&oacute;n</b></td>
+            <td>{{ entity.descripcion }}</td>
+        </tr>
+        <tr>
+            <td><b>Valor</b></td>
+            <td>{{ entity.valor }}</td>
+        </tr>
+        <tr>
+            <td><b>Ubicaci&oacute;n</b></td>
+            <td>{% if entity.activo.ubicacion %}{{ entity.activo.ubicacion.dependencia }}{% else %}Ninguna{% endif %}</td>
+        </tr>
+        <tr>
+            <td><b>Estatus</b></td>
+            <td>{% if entity.activo.estatus == STOCK_ALMACEN %}
+                    STOCK ALMACEN
+                 {% elseif entity.activo.estatus == ASIGNADO %}
+                    ASIGNADO
+                 {% elseif entity.activo.estatus == REASIGNADO %}
+                    REASIGNADO
+                 {% elseif entity.activo.estatus == DESINCORPORADO %}
+                    DESINCORPORADO
+                {% else %}
+                    DESCONOCIDO
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td><b>Observaci&oacute;n</b></td>
+            <td>{{ entity.activo.observacion }}</td>
+        </tr>
+   </tbody>
+</table>
+<br/><br/><br/>
+<table class="" width="100%" border="0">
+  <tr>
+    <td>
+        <a class="ajaxContenido" href="{{ path('mobiliario_edit', { 'id': entity.id }) }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Agregar" />
+                Editar
+            </button>
+        </a>
+    </td>
+    <td>
+        <a class="ajaxContenido" href="{{ path('mobiliario', { 'id': entity.id,'menu' : 1 }) }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/regresar.png') }}" width="24" height="24" alt="Regresar" />
+                Regresar
+            </button>
+        </a>
+    </td>
+  </tr>
+</table>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

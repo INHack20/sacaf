@@ -1,0 +1,10 @@
+<h1 class="textoDecorado">A&ntilde;adir Componente</h1>
+
+<form id="frmRegistrar" action="{{ path('componente_create',{'equipo_id' : equipo_id}) }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form, { 'attr' : { 'align' : 'center' } }) }}
+    <br/><br>
+    <p align="center">
+        <button type="submit" class="miBoton">A&ntilde;adir</button>
+    </p>
+</form>
+{% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' with {'options' : 'dialogo'} %}

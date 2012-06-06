@@ -1,0 +1,16 @@
+div#cargando{
+ 
+    display: none;
+    color: black;
+    position: fixed;
+    left: 40%;
+    top: 0%;
+    width: 20%;
+    z-index: 1000;
+    text-align: center;
+    background-color: white;
+    border: 1px solid black;
+}
+div#result-busqueda{
+   min-height: 220px; 
+}

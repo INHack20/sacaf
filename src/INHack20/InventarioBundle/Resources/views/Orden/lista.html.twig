@@ -1,0 +1,57 @@
+{% if pager.isPaginable %}
+<table align="right"><tr><td>{{ paginate(pager,'orden') }}</td></tr></table>
+<br/>
+{% endif %}
+<br/>
+{% if pager.hasResults | length > 0 %}
+
+<table class="records_list tabla-1" align="center">
+    <thead>
+        <tr>
+            
+            <th>N&deg; compra</th>
+            <th>Fecha</th>
+            <th>Empresa</th>
+            <th>Factura</th>
+            <th>Fecha de factura</th>
+            <th>Acta de recepcion</th>
+            
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in pager.getResults %}
+        <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%} align="center">
+            
+            <td>{{ entity.ordencompra }}</td>
+            <td>{% if entity.fechacompra %}{{ entity.fechacompra|date('d-m-Y') }}{% endif%}</td>
+            <td>{{ entity.empresa }}</td>
+            <td>{{ entity.factura }}</td>
+            <td>{% if entity.fechafactura %}{{ entity.fechafactura|date('d-m-Y') }}{% endif%}</td>
+            <td>{{ entity.actarecepcion }}</td>
+            
+            <td>
+                <ul>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('orden_show', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                            Ver</a>
+                    </li>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('orden_edit', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                            Editar</a>
+                    </li>
+                 </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if pager.isPaginable %}
+    {{ paginate(pager,'orden') }}
+{% endif %}
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% else %}
+<h1 align="center" class="textoDecorado">No se encontraron Ordenes.</h1>
+{% endif%}

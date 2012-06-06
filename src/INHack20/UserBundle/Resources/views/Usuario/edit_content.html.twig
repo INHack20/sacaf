@@ -1,0 +1,12 @@
+{% form_theme form theme %}
+
+<form action="{{ path('fos_user_update_usuario',{'id' : usuario.id }) }}" {{ form_enctype(form) }} method="POST" class="fos_user_profile_edit">
+    {{ form_widget(form,{'attr' : {'align' : 'center'} }) }}
+    {{ form_rest(form) }}
+    <br/><br/><br/>
+    <p align="center">    
+        
+            <input class="miBoton" type="submit" value="{{ 'profile.edit.submit'|trans({}, 'FOSUserBundle') }}" />
+        
+    </p>
+</form>

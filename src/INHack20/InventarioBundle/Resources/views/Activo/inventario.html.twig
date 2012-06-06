@@ -1,0 +1,14 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Inventario{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Inventario por Dependencia</h1>
+<br/><br/>
+
+<form action="{{ path('activo_reporte', {'tipoActivo' : tipoActivo}) }}" method="post" {{ form_enctype(form) }} >
+    {{ form_widget(form) }}
+        <br/>
+        <p align="center">
+            <button type="submit" class="miBoton" >Ver Inventario</button>
+        </p>    
+</form>
+{% endblock %}

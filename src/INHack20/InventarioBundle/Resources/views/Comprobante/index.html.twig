@@ -1,0 +1,26 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+
+
+
+{% block contenido %}
+<h1 class="textoDecorado">Lista de Comprobantes De
+    {% if tipo == 1  %}
+        Entrega
+    {% elseif tipo == 2%}
+        Reasignaci&oacute;n
+    {% elseif tipo == 3%}
+        Desincorporaci&oacute;n
+    {%endif%}   
+</h1>
+<br/><br/>
+    {% include 'INHack20InventarioBundle:Comprobante:formBuscar.html.twig' %}
+<br>
+<div id="result-busqueda">
+    {% include 'INHack20InventarioBundle:Comprobante:lista.html.twig' with { 'pager' : pager, 'tipo' : tipo }%}
+</div>
+<br/><br/>
+{% endblock %}

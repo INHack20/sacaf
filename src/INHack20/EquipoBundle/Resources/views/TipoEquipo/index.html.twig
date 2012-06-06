@@ -1,0 +1,52 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block titulo %}
+    Tipos de Equipos
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Tipos de Equipos</h1>
+<br/><br/>
+<table align="center" class="records_list tabla-1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripci&oacute;n</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ entity.descripcion }}</td>
+            <td>
+               <ul>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('tipoequipo_show', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                            Ver</a>
+                    </li>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('tipoequipo_edit', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                            Editar</a>
+                    </li>
+                 </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<br/><br/><br/>
+<a class="ajaxContenido" href="{{ path('tipoequipo_new') }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                 A&ntilde;adir
+            </button>
+</a>
+<br/><br/>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

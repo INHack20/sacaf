@@ -1,0 +1,55 @@
+{% form_theme form_buscar 'INHack20InventarioBundle:Form:fields.html.twig' %}
+<form id="formBuscar" action="{{ path('equipo',{ 'comprobante_id' : comprobante_id, 'accion' : accion }) }}" method="post" {{ form_enctype(form_buscar) }}>
+    <div style="min-height: 100px">
+        {{ form_row(form_buscar.tipobusqueda) }}
+        {{ form_row(form_buscar.fecha, { 'class' : '1' }) }}
+        {{ form_row(form_buscar.ubicacion, { 'class' : '2' }) }}
+        {{ form_row(form_buscar.nrobiennacional, { 'class' : '3' }) }}
+        {{ form_row(form_buscar.marca, { 'class' : '4' }) }}
+        {{ form_row(form_buscar.modelo, { 'class' : '5' }) }}
+        {{ form_row(form_buscar.serial, { 'class' : '6' }) }}
+        {{ form_rest(form_buscar) }}    
+            <br/>
+     </div>
+            <p align="right">
+            <button id="btnBuscar" class="miBoton">
+                <img src="{{ asset('bundles/inhack20inventario/images/buscar.png') }}" width="16" height="16" alt="Buscar" />
+                Buscar</button>
+            </p>        
+</form>
+<script type="text/javascript">
+        $(document).ready(function(){
+                    var options = { 
+                        target:        '#result-busqueda',   // target element(s) to be updated with server response 
+                        beforeSubmit:  cargando,  // pre-submit callback 
+                        success:       listoCargado  // post-submit callback 
+                    }; 
+                    $("#formBuscar").ajaxForm(options);
+                    function ocultar(){
+                        $(".busqueda").hide();
+                    }
+                    function limpiar(){
+                        $(".busqueda input").attr("value","");
+                        $(".busqueda select").attr("value","");
+                        $(".busqueda textarea").attr("value","");
+                    }
+                    $("#form_buscar_tipobusqueda").change(function(){
+                        limpiar();
+                        ocultar();
+                        if($(this).val()!="")
+                            {
+                                $("."+$(this).val()).show(500);
+                            }                
+                    });
+                    $("#form_buscar_tipobusqueda").attr("value","");
+                    $(".busqueda").hide();
+            
+            //Campos del formulario
+            $("#form_buscar_fecha").datepicker();
+        });
+    </script>
+    <style type="text/css">
+            table#form tbody th, tbody td {
+                text-align: left;
+               }
+    </style>

@@ -1,0 +1,43 @@
+<h1>Activo list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nrobiennacional</th>
+            <th>Observacion</th>
+            <th>Creado</th>
+            <th>Actualizado</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('activo_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.nroBienNacional }}</td>
+            <td>{{ entity.observacion }}</td>
+            <td>{% if entity.creado %}{{ entity.creado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if entity.actualizado %}{{ entity.actualizado|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('activo_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('activo_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('activo_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

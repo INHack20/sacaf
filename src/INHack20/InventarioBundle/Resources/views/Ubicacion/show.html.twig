@@ -1,0 +1,48 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Ubicaci&oacute;n{% endblock %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Ubicaci&oacute;n</h1>
+<br/><br/><br/>
+<table class="record_properties tabla-1" align="center">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Dependencia</th>
+            <td>{{ entity.dependencia }}</td>
+        </tr>
+        <tr>
+            <th>Estado</th>
+            <td>{{ entity.estado.descripcion }}</td>
+        </tr>
+    </tbody>
+</table>
+<br/><br/><br/>
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <a class="ajaxContenido" href="{{ path('ubicacion_edit', { 'id': entity.id }) }}">
+            <button class="miBoton">
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                Editar
+            </button>
+        </a>
+    </td>
+    <td>
+        <a class="ajaxContenido" href="{{ path('ubicacion',{'menu' : 1 }) }}">
+            <button class="miBoton">
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                Regresar
+            </button>
+        </a>
+    </td>
+  </tr>
+</table>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

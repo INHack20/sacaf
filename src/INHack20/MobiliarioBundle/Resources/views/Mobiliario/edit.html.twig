@@ -1,0 +1,52 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Editar Mobiliario{% endblock%}
+{% block contenido %}
+<h1 align='center' class="textoDecorado">Editar Mobiliario</h1>
+<br/><br/>
+<form id="frmEditar" action="{{ path('mobiliario_update', { 'id': entity.id, 'orden_id' : orden_id }) }}" method="post" {{ form_enctype(edit_form) }}>
+    <table class="tabla-2" border="0" align="center">
+    <tr>
+        <td width="126px">{{ form_label(edit_form.activo.nroBienNacional) }}{{ form_errors(edit_form.activo.nroBienNacional) }}</td>
+        <td>{{ form_widget(edit_form.activo.nroBienNacional) }}</td>
+    </tr>
+    <tr>
+        <td> {{ form_label(edit_form.activo.observacion) }} {{ form_errors(edit_form.activo.observacion) }}</td>
+        <td> {{ form_widget(edit_form.activo.observacion) }}</td>
+    </tr>
+  <tr>
+     <td colspan="2">
+        {{ form_widget(edit_form) }}
+     </td>
+  </tr>
+</table> 
+    <br/>
+    
+</form>
+<br/><br/>
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <button id="btnGuardar" class="miBoton">
+            <img src="{{ asset('bundles/inhack20inventario/images/guardar.png') }}" width="24" height="24" alt="Guardar" />
+            Guardar Cambios
+        </button>
+    </td>
+    <td>
+       <button id="btnEliminar" class="miBoton" type="submit">
+                        <img src="{{ asset('bundles/inhack20inventario/images/eliminar.png') }}" width="24" height="24" alt="Eliminar" />
+                        Eliminar</button>
+    </td>
+  </tr>
+</table>
+<br/><br/>
+ <form id="frmEliminar" action="{{ path('mobiliario_delete', { 'id': entity.id, 'orden_id' : orden_id }) }}" method="post">
+                    {{ form_widget(delete_form) }}
+</form>
+
+       {% if orden_id > 0 %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig'  with {'options' : 'dialogo'}%}
+        {% else %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig' %}
+        {% endif %}
+
+{% endblock %}

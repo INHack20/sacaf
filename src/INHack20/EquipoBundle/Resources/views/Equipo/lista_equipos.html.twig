@@ -1,0 +1,77 @@
+{% if entities | length == 0 %}
+    <br/><br/><br/><br/><br/>
+    <p align="center">
+        <font color='green' size="5px">La orden no tiene activos asociados</font>
+    </p>
+{% else %}
+<h1 align='center' class="textoDecorado">Equipos</h1>
+<table class="records_list tabla-1" align='center'>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Serial</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ entity.equipo.marca }}</td>
+            <td>{{ entity.equipo.modelo }}</td>
+            <td>{{ entity.equipo.serial }}</td>
+            <td>{{ entity.equipo.tipoEquipo.descripcion }}</td>
+            <th>
+                <ul>
+                    {% if orden_id is defined %}
+                        <li>
+                            <a class="dialogo-form-lista-editar" href="{{ path('equipo_edit', { 'id': entity.equipo.id, 'orden_id' : orden_id }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                                Editar
+                            </a>
+                        </li>        
+                    {% endif %}
+                    {% if comprobante_id is defined %}
+                        {% if accion is defined and accion == OPERACIONES %}
+                            <li>
+                                    <a class="ajaxResult-activos" href="{{ path('comprobante_remover_activo', { 'comprobante_id': comprobante_id ,'activo_id' : entity.id }) }}">
+                                        <img src="{{ asset('bundles/inhack20inventario/images/eliminar.png') }}" width="24" height="24" alt="Remover" />
+                                    </a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
+                 </ul>   
+             </th>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+       {% if orden_id is defined %}
+            $( ".dialogo-form-lista-editar" )
+                        .click(function(e) {
+                            e.preventDefault();
+                            cargando();
+                                $("#dialogo-contenido").load($(this).attr('href'),function(){
+                                    listoCargado();
+                                $( "#dialogo" ).fadeIn(400).dialog( "open" );
+                            });
+
+            });
+        {% endif %}     
+        {% if comprobante_id is defined %}
+            $(".ajaxResult-activos").click(function(e){
+                                e.preventDefault();
+                                    cargando();
+                                    $("#result-activos").load($(this).attr('href'),function(){
+                                        listoCargado();
+                                    });
+                });
+        {% endif %}
+    });
+</script>
+{% endif %}

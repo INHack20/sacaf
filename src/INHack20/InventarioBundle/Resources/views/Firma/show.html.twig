@@ -1,0 +1,61 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Firma{% endblock %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Firma</h1>
+<br>
+<br>
+<table class="record_properties tabla-1" align="center">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Apellido</th>
+            <td>{{ entity.apellido }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ entity.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Cargo</th>
+            <td>{{ entity.cargo }}</td>
+        </tr>
+        <tr>
+            <th>Estado</th>
+            <td>{{ entity.estado.descripcion}}</td>
+        </tr>
+        <tr>
+            <th>Dependencia</th>
+            <td>{{ entity.ubicacion.dependencia }}</td>
+        </tr>
+    </tbody>
+</table>
+<br/><br/><br/>
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <a class="ajaxContenido" href="{{ path('firma_edit', { 'id': entity.id }) }}">
+            <button class="miBoton">
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                Editar
+            </button>
+        </a>
+    </td>
+    <td>
+        <a class="ajaxContenido" href="{{ path('firma',{'menu' : 1}) }}">
+                    {{ form_widget(delete_form) }}
+                    <button class="miBoton" type="submit">
+                        <img src="{{ asset('bundles/inhack20inventario/images/regresar.png') }}" width="24" height="24" alt="Eliminar" />
+                        regresar</button>
+        </a>
+        </td>
+  </tr>
+</table>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

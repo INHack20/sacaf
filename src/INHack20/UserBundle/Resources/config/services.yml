@@ -1,0 +1,11 @@
+services:
+    inhack20_user.registration.form.type:
+        class: INHack20\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: inhack20_user_registration }
+    inhack20_user.profile.form.type:
+        class: INHack20\UserBundle\Form\Type\ProfileFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            - { name: form.type, alias: inhack20_user_profile}

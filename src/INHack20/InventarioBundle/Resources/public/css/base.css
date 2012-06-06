@@ -1,0 +1,163 @@
+body {
+margin: 0;
+padding : 0;
+background: #ccc url(../images/bg.jpg) center repeat;
+color: #555;
+}
+			/*WRAP*/
+#container {
+width: 830px;
+margin-left: auto;
+margin-right: auto;
+padding: 0;
+font: 76% "Trebuchet MS","lucida sans", tahoma, sans-serif;
+line-height: 1.8em;
+background: transparent;
+color: #666;
+}
+			/*TOP BANNER*/
+#banner {
+padding: 0;
+margin-bottom: 0;
+height: 164px;
+border-bottom:3px solid #fff;
+background: #82B64D url(../images/wine.jpg);
+color: #000;
+}
+			/*MAIN CONTENT*/
+#content {
+margin-top: 30px;
+padding: 1em;
+margin-left: 200px;
+}
+			/*SIDEBAR*/
+#sidebar {
+float: left;
+width: 160px;
+margin: 0;
+padding: 0 1em 0 1em;
+min-height: 500px;
+}
+			/*SIDE MENU*/
+#sidebar ul {
+list-style: none;
+margin: 0 0 20px 0;
+padding: 0;
+}
+#sidebar ul li { 
+display: inline;
+padding: 0;
+margin: 0;
+}
+#sidebar ul li a {
+display: block;
+color: #385900;
+background: inherit;
+text-decoration: none;
+margin: 0;
+padding: 5px 0 5px 0;
+border-bottom: 1px solid #C0C0C0;
+}
+#sidebar ul li a:hover {
+text-decoration: none;
+background: #E6E7E9;
+color: #DA7910;
+}
+			/*FOOTER*/
+#footer {
+clear: both;
+width:820px;
+padding: 5px;
+margin: 0;
+font-size: 0.8em;
+border-top: 3px solid #fff;
+border-bottom: 3px solid #fff;
+background: #868749;
+color: #fff;
+text-align:center;
+}
+#footer a:link, #footer a:visited {
+text-decoration : none;
+background : inherit;
+color : #000; 
+}
+#footer a:hover {
+text-decoration : underline;
+background : inherit;
+color :  #fff;
+}
+			/*LINKS*/
+a:link, a:visited {
+text-decoration : none;
+background : inherit;
+color : #868749;
+}
+a:hover {
+text-decoration : underline;
+background : inherit;
+color :  #385900; 
+}
+			/*TYPOGRAPHY*/
+h1 {
+margin: 0;
+padding: 30px 0 0 20px;
+font-size: 175%;
+letter-spacing: 3px;
+color:#FFFFFF;
+}
+h2 {
+margin-top: 10px;
+padding: 10px 0 10px 0;
+font-size: 160%;
+letter-spacing: 3px;
+background : transparent;
+color :   #385900;
+}
+h3 {
+margin: 0;
+padding: 10px 0 10px 0;
+font-size: 160%;
+letter-spacing: 3px;
+background : inherit;
+color :  #385900;
+}
+blockquote {
+font-weight : bold;
+font-style : italic;
+color : #b29b35;
+}
+			/*CLASS*/
+.clear {
+clear: both;
+overflow: hidden;
+width: 0;
+height: 0;
+}
+.slogan {
+margin: 0 0 0 50px;
+letter-spacing: 3px;
+}
+
+.post{
+background: #E6E7E9;
+padding: 3px;
+margin: 20px 10px 10px 5px;
+font-size: 80%;
+}
+.post .date {
+background: url(../images/clock.gif) no-repeat left center;
+padding-left: 15px;
+margin: 0 15px 0 5px;
+}
+.post .comments {
+background: url(../images/comment.gif) no-repeat left center;
+padding-left: 15px;
+margin: 0 15px 0 5px;
+}
+.post .readmore {
+background: url(../images/document.gif) no-repeat left center;
+padding-left: 15px;
+margin: 0 15px 0 5px;
+}
+
+#contenido img.imagen_formato		{border:1px solid #000000; float:right; margin:0 0 20px 20px; }

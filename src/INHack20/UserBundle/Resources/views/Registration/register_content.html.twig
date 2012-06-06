@@ -1,0 +1,9 @@
+{% form_theme form theme %}
+
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {{ form_widget(form,{'attr' : {'align' : 'center'} }) }}
+   <br/><br/><br/>
+    <p align="center">   
+        <input class="miBoton" type="submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}" />
+     </p>
+</form>

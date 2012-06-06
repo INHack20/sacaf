@@ -1,0 +1,45 @@
+<BR/>
+{% if pager.getResults | length > 0 %}
+{% if pager.isPaginable %}
+<table align='right'><tr><td>
+    {{ paginate(pager,'mobiliario_buscar',{ 'id' : comprobante.id , 'busqueda' : busqueda, 'tipo' : tipo },'MakerLabsPagerBundle:Pager:paginate_ajax.html.twig') }}
+</td></tr></table>
+    <br/>
+{% endif %}
+<table width="100%" border="1" class="tabla-1">
+    <thead>
+    <tr>
+        <th>Nº</th>
+        <th>Nº BN</th>
+        <th>Descripción</th>
+        <th>Ubicación</th>
+        <th>Agregar</th>
+    </tr>
+    </thead>
+    <tbody>
+    {%for entity in pager.getResults %}
+    <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%}>
+        <td><a href="{{ path('mobiliario_show', { 'id' : entity.id }) }}">{{ loop.index }}</a></td>
+        <td>{{ entity.activo.nroBienNacional }}</td>
+        <td>{{ entity.descripcion }}</td>
+        <td>{% if entity.activo.ubicacion %}{{ entity.activo.ubicacion.dependencia }}{% endif %}</td>
+        <th>
+            {% if(entity.activo.ubicacion.dependencia != comprobante.ubicacion.dependencia ) %}
+                <a class="" href="{{ path('comprobante_asociar_activo',{ 'id_comprobante' : comprobante.id, 'id_activo' : entity.activo.id }) }}">
+                    <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                </a>
+            {% else %}
+                <img src="{{ asset('bundles/inhack20inventario/images/listo.png') }}" width="24" height="24" alt="Agregar" />
+            {% endif %}
+        </th>
+    </tr>    
+    {% endfor %}
+    </tbody>
+    </table>
+{% if pager.isPaginable %}
+    <br/><br/>
+    {{ paginate(pager,'mobiliario_buscar',{ 'id' : comprobante.id , 'busqueda' : busqueda, 'tipo' : tipo },'MakerLabsPagerBundle:Pager:paginate_ajax.html.twig') }}
+{% endif %}
+{% else %}
+<p align='center'>No se han encontrado resultados.</p>
+{% endif %}

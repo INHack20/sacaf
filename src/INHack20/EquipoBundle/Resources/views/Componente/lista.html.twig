@@ -1,0 +1,58 @@
+<table align="center" class="records_list tabla-1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripci&oacute;n</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('componente_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.descripcion }}</td>
+            <td>{{ entity.tipocomponente.descripcion }}</td>
+            <td>
+                <ul>
+                        <li>
+                            <a class="dialogo-form-lista-editar" href="{{ path('componente_edit', { 'id': entity.id, 'equipo_id' : equipo_id }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                                Editar</a>
+                        </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+        <tr>
+            <th colspan="4"><a id="dialogo-form-lista-agregar" href="{{ path('componente_new', { 'equipo_id': equipo_id }) }}" >
+                                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                                Agregar</a></th>
+        </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "#dialogo-form-lista-agregar" )
+                .click(function(e) {
+                    e.preventDefault();
+                    cargando();
+                        $("#dialogo-contenido").load($(this).attr('href'),function(){
+                            listoCargado();
+                            $( "#dialogo" ).fadeIn(400).dialog( "open" );
+                        });
+                                        
+        });
+        $( ".dialogo-form-lista-editar" )
+                .click(function(e) {
+                    e.preventDefault();
+                    cargando();
+                        $("#dialogo-contenido").load($(this).attr('href'),function(){
+                            listoCargado();
+                            $( "#dialogo" ).fadeIn(400).dialog( "open" );
+                        });
+                                        
+        });
+    });
+</script>
+ 

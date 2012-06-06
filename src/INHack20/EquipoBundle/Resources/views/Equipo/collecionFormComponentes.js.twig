@@ -1,0 +1,78 @@
+<script type="text/javascript">
+            // Obtiene el div que contiene la colección de etiquetas
+        var collectionHolder = $('ul.componentes');
+
+        // configura una enlace "Agregar una etiqueta"
+        var boton = '<br/><br/><table align="center" border="0">\
+            <tr>\
+                <td>\
+                <a class="add_tag_link" href="#"><button class="miBoton" >\
+                <img src="{{ asset("bundles/inhack20inventario/images/agregar.png") }}" width="24" height="24" />\
+                    A&ntilde;adir\
+                    </button>\
+                </a>\
+                 </td>\
+            </tr>\
+        </table>\
+            ';
+        var $addTagLink = $(boton);
+        var $newLinkLi = $('<li></li>').append($addTagLink);
+
+        $(document).ready(function() {
+            
+            // Añade un enlace para borrar todas las etiquetas existentes
+            // en elementos li del formulario
+            collectionHolder.find('li').each(function() {
+                addTagFormDeleteLink($(this));
+            });
+            
+            // Añade el ancla "Agregar una etiqueta" y las etiquetas li y ul
+            collectionHolder.append($newLinkLi);
+
+            $addTagLink.on('click', function(e) {
+                // evita crear el enlace con una "#" en la URL
+                e.preventDefault();
+
+                // Añade una nueva etiqueta al formulario (ve el siguiente bloque de código)
+                addTagForm();
+            });
+            
+            function addTagFormDeleteLink($tagFormLi) {
+                var boton = '<table align="center" border="0">\
+            <tr>\
+                <td>\
+                <a href="#"><button class="miBoton" >\
+                    <img src="{{ asset("bundles/inhack20inventario/images/eliminar.png") }}" width="24" height="24" />\
+                        Eliminar\
+                        </button>\
+                    </a>\
+                    </td>\
+            </tr>\
+            </table><br/><br/><hr>';
+                var $removeFormA = $(boton);
+                $tagFormLi.append($removeFormA);
+
+                $removeFormA.on('click', function(e) {
+                    // evita crear el enlace con una "#" en la URL
+                    e.preventDefault();
+
+                    // quita el li de la etiqueta del formulario
+                    $tagFormLi.remove();
+                });
+            }//fin funcion
+            
+            function addTagForm() {
+                // Obtiene el data-prototype que explicamos anteriormente
+                var prototype = collectionHolder.attr('data-prototype');
+
+                // Sustituye "__name__" en el prototipo HTML para que
+                // en su lugar sea un número basado en la longitud de la colección actual.
+                var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
+
+                // Muestra el formulario en la página en un li, antes del enlace "Agregar una etiqueta"
+                var $newFormLi = $('<li></li>').append(newForm);
+                $newLinkLi.before($newFormLi);
+                addTagFormDeleteLink($newFormLi);
+            }//FIN FUNCION
+        });
+</script>

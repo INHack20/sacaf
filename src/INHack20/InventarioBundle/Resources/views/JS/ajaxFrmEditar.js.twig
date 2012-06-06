@@ -1,0 +1,35 @@
+{#
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig' %}
+
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig'  with {'options' : 'dialogo'}%}
+
+#}
+<script type="text/javascript">
+   $(document).ready(function(){
+            {% if options is defined %}
+                function listo(){
+                $("#dialogo").dialog("close");
+                listoCargado();
+                };
+                var options = { 
+                                target:        '#result-busqueda',   // target element(s) to be updated with server response 
+                                beforeSubmit:  cargando,  // pre-submit callback 
+                                success:       listo  // post-submit callback                         /
+                            };
+            {% else %}
+                var options = { 
+                            target:        '#contenido',   // target element(s) to be updated with server response 
+                            beforeSubmit:  cargando,  // pre-submit callback 
+                            success:       listoCargado  // post-submit callback                         /
+                        };
+             {% endif %} 
+                    
+       
+            $("#btnEliminar").click(function(){
+                 $("#frmEliminar").submit();
+            });
+            $('#frmEditar').ajaxForm(options); 
+            $('#frmEliminar').ajaxForm(options); 
+        
+    });
+</script>

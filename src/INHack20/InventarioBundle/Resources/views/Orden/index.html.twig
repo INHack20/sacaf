@@ -1,0 +1,18 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block titulo %}
+    Ordenes
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Ordenes</h1>
+<br/>
+    {% include 'INHack20InventarioBundle:Orden:formBuscar.html.twig' %}
+<br/><br/>
+<div id="result-busqueda">
+    {% include 'INHack20InventarioBundle:Orden:lista.html.twig' %}
+</div>    
+<br/><br/><br/>
+{% endblock %}

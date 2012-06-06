@@ -1,0 +1,14 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Lista de Ubicaciones{% endblock %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<br/>
+<br/>
+<div id="result-busqueda">
+    {% include 'INHack20InventarioBundle:Ubicacion:lista.html.twig' %}
+</div>   
+<br/><br/><br/>
+{% endblock %}

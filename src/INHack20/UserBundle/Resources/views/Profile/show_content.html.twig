@@ -1,0 +1,46 @@
+<div class="fos_user_user_show">
+    <table align="center" border="1" class="tabla-1" >
+        <tr>
+            <th colspan="2">Datos del usuario</th>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.username'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{{ user.username }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.email'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{{ user.email }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.nombre'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{{ user.nombre }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.apellido'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{{ user.apellido }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.cedula'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{{ user.cedula }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.cargo'|trans({}, 'FOSUserBundle') }}: </td>
+            <td>{{ user.cargo }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'profile.show.estado'|trans({}, 'FOSUserBundle') }}:</td>
+            <td>{% if user.estado %}{{ user.estado.descripcion }}{% endif %}</td>
+        </tr>
+
+            <tr>
+                <td>{{ 'profile.show.activada'|trans({}, 'FOSUserBundle') }}:</td>
+                <td>{% if user.enabled %}<font color="green">SI</font>{% else %}<font color="red">No</font>{% endif %}</td>
+            </tr>
+            <tr>
+                <td>{{ 'profile.show.bloqueada'|trans({}, 'FOSUserBundle') }}:</td>
+                <td>{% if user.locked %}<font color="red">Si</font>{% else %}<font color="green">No</font>{% endif %}</td>
+            </tr>
+        
+    </table>
+    
+</div>

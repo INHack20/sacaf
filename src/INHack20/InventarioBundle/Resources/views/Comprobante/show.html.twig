@@ -1,0 +1,221 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}Comprobante{% endblock %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">
+    {% if entity.tipo == 1%}
+        Comprobante de Entrega
+    {% elseif entity.tipo == 2 %}
+        Comprobante de Reasignaci&oacute;n
+    {% elseif entity.tipo == 3 %}
+        Comprobante de Desincorporaci&oacute;n
+    {% endif %}
+</h1>
+<br/><br/><br/>
+<table class="record_properties tabla-1" cellpadding="2" cellspacing="2" align="center">
+        <tr>
+            <th colspan="2" bgcolor="#CCCCCC">TIPO</th>
+        </tr>
+        <tr>
+            <th colspan="2" >{% if entity.tipoactivo == ACTIVO_MOBILIARIO %}MOBILIARIO{% elseif entity.tipoactivo == ACTIVO_EQUIPO %}EQUIPO{% endif %}</th>
+        </tr>
+        <tr>
+            <th colspan="2" bgcolor="#CCCCCC">DEPENDENCIA USUARIA</th>
+        </tr>
+        <tr>
+            <td><b>C&oacute;digo</b></td>
+            <td>{{ entity.ubicacion.codigo }}</td>
+        </tr>
+        <tr>
+            <td><b>Denominaci&oacute;n</b></td>
+            <td>{{ entity.ubicacion.dependencia }}</td>
+        </tr>
+        <tr>
+            <th colspan="2" bgcolor="#CCCCCC">ALMACEN</th>
+        </tr>
+        <tr>
+            <td><b>C&oacute;digo</b></td>
+            <td>{{ entity.almacencodigo }}</td>
+        </tr>
+        <tr>
+            <td><b>Denominaci&oacute;n</b></td>
+            <td>{{ entity.almacendenominacion }}</td>
+        </tr>
+        <tr>
+            <td><b>Cedula del Responsable</b></td>
+            <td>{{ entity.almacenrespci }}</td>
+        </tr>
+        <tr>
+            <td><b>Nombre del Responsable</b></td>
+            <td>{{ entity.almacenrespapellnom }}</td>
+        </tr>
+        <tr>
+            <td><b>Nota</b></td>
+            <td>{{ entity.nota }}</td>
+        </tr>
+        {% if entity.tipo == 1 %}
+            <tr>
+                <th colspan="2" bgcolor="#CCCCCC">DESPACHADOR</th>
+            </tr>
+            <tr>
+                <td><b>Apellidos y Nombres</b></td>
+                <td>{{ entity.usuario.nombrecompleto }}</td>
+            </tr>
+            <tr>
+                <td><b>Cedula</b></td>
+                <td>{{ entity.usuario.cedula }}</td>
+            </tr>
+            <tr>
+                <td><b>Cargo</b></td>
+                <td>{{ entity.usuario.cargo }}</td>
+            </tr>
+            <tr>
+                <th colspan="2" bgcolor="#CCCCCC">RECEPTOR</th>
+            </tr>
+            {% if entity.ubicacion.firmas | length > 0 %}
+                <tr>
+                    <td><b>Apellidos y Nombres</b></td>
+                    <td>{% if entity.ubicacion.firmas | length > 0 %}{{ entity.ubicacion.firmas[0].nombrecompleto }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>Cedula</b></td>
+                    <td>{% if entity.ubicacion.firmas | length > 0 %}{{ entity.ubicacion.firmas[0].cedula }}{% endif %}</td>
+                </tr>
+                <tr>
+                    <td><b>Cargo</b></td>
+                    <td>{% if entity.ubicacion.firmas | length > 0 %}{{ entity.ubicacion.firmas[0].cargo }}{% endif %}</td>
+                </tr>
+            {% else %}
+                 <tr>
+                     <th colspan="2"><font color='red'>
+                         NO TIENE FIRMA ASOCIADA
+                         {% if accion is defined and accion == OPERACIONES %}
+                            <a class="ajaxContenido" href="{{ path('firma_new', { 'id_comprobante' : entity.id ,'id': entity.ubicacion.id }) }}">
+                                (<img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                                Agregar)
+                            </a>
+                         {% endif %}
+                         </font>
+                     </th>
+                 </tr>
+            {% endif %}
+        {% elseif entity.tipo == 2 or entity.tipo == 3  %}
+            <tr>
+                <th colspan="2" bgcolor="#CCCCCC">RESPONSABLE PATRIMONIAL PRIMARIO</th>
+            </tr>
+            <tr>
+                <td><b>Cedula</b></td>
+                <td>{{ entity.usuario.cedula }}</td>
+            </tr>
+            <tr>
+                <td><b>Apellidos y Nombres</b></td>
+                <td>{{ entity.usuario.nombrecompleto }}</td>
+            </tr>
+            <tr>
+                <td><b>Cargo</b></td>
+                <td>{{ entity.usuario.cargo }}</td>
+            </tr>
+        {% endif %}
+        
+    
+</table>
+<br/><br/>
+<div id="result-activos">
+    {% if entity.activos | length > 0 %}
+    <br/>
+        {% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+            {% include 'INHack20MobiliarioBundle:Mobiliario:lista_mobiliarios.html.twig' with { 'entities' : entity.activos, 'comprobante_id' : entity.id } %}
+        {% elseif entity.tipoactivo == ACTIVO_EQUIPO %}
+            {% include 'INHack20EquipoBundle:Equipo:lista_equipos.html.twig' with { 'entities' : entity.activos, 'comprobante_id' : entity.id } %}
+        {% else %}
+            ERROR TIPO DE ACTIVO ={{ entity.tipoactivo }} DESCONOCIDO
+        {% endif %}
+    {% else %}
+    <p align='center'><font color='green' size='6px'>No se han asociado activos.</font></p>
+    {% endif%}
+</div>
+<style type="text/css">
+		div#dialog-form { font-size: 62.5%; }
+		label, input { display:block; }
+		input.text { margin-bottom:12px; width:95%; padding: .4em; }
+		fieldset { padding:0; border:0; margin-top:25px; }
+		h1 { font-size: 1.2em; margin: .6em 0; }
+		div#users-contain { width: 350px; margin: 20px 0; }
+		div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+		div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+		.ui-dialog .ui-state-error { padding: .3em; }
+		.validateTips { border: 1px solid transparent; padding: 0.3em; }
+                
+</style>
+<script type="text/javascript">
+	$(function() {
+		// a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
+		$( "#dialog:ui-dialog" ).dialog( "destroy" );
+		
+		$( "#dialog-form" ).dialog({
+			autoOpen: false,
+			height: 400,
+			width: 850,
+                        show: "blind",
+                        hide: "explode",
+			modal: true,
+			close: function(e) {
+                                e.preventDefault();
+				
+			}
+		});
+                
+		$( "#anadir-activo" )
+			.click(function() {
+                                $("#result-busqueda").html("");
+				$( "#dialog-form" ).dialog( "open" );
+			});
+              function cargar()
+              {
+                cargando(false);
+              }
+              function listo(){listoCargado();};
+          });
+</script>
+        
+
+    <div id="dialog-form" title="A&ntilde;adir Activo">
+        {% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+            {% include 'INHack20MobiliarioBundle:Mobiliario:formBuscar.html.twig' with {'comprobante_id' : entity.id }%}
+        {% elseif entity.tipoactivo == ACTIVO_EQUIPO %}    
+            {% include 'INHack20EquipoBundle:Equipo:formBuscar.html.twig' with {'comprobante_id' : entity.id } %}
+        {% endif %}    
+            
+            
+            <div id="result-busqueda"></div>
+    </div>
+
+<br/><br/>
+{% if accion is defined and accion == OPERACIONES %}
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <a id="anadir-activo" href="#a">
+    <button class="miBoton" >
+        <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+        Agregar Activo
+    </button>
+        </a>
+    </td>
+    <td>
+        <a class="ajaxContenido" href="{{ path('comprobante_edit', { 'id': entity.id }) }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Agregar" />
+                Editar
+            </button>
+        </a>
+    </td>
+  </tr>
+</table>
+{% endif %}
+<br/><br/>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

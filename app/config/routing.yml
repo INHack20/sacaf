@@ -1,0 +1,20 @@
+INHack20EquipoBundle:
+    resource: "@INHack20EquipoBundle/Controller/"
+    type:     annotation
+    
+INHack20InventarioBundle:
+    resource: "@INHack20InventarioBundle/Controller/"
+    type:     annotation
+
+INHack20MobiliarioBundle:
+    resource: "@INHack20MobiliarioBundle/Controller/"
+    type:     annotation
+    
+INHack20UserBundle:
+    resource: "@INHack20UserBundle/Resources/config/routing.yml"
+    
+# Internal routing configuration to handle ESI
+#_internal:
+#    resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
+#    prefix:   /_internal
+

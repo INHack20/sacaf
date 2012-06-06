@@ -1,0 +1,120 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Orden</h1>
+<br/><br/>
+<table class="record_properties tabla-1" align='center' >
+   
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Orden de compra</th>
+            <td>{{ entity.ordencompra }}</td>
+        </tr>
+        <tr>
+            <th>Fecha de compra</th>
+            <td>{{ entity.fechacompra|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Empresa</th>
+            <td>{{ entity.empresa }}</td>
+        </tr>
+        <tr>
+            <th>Factura</th>
+            <td>{{ entity.factura }}</td>
+        </tr>
+        <tr>
+            <th>Fecha de factura</th>
+            <td>{{ entity.fechafactura|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Acta de recepcion</th>
+            <td>{{ entity.actarecepcion }}</td>
+        </tr>
+        <tr>
+            <th>Fecha del acta de recepcion</th>
+            <td>{{ entity.actarecepcionfecha|date('d/m/Y') }}</td>
+        </tr>
+        <tr>
+            <th>Tipo</th>
+            <td>
+                {% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+                    MOBILIARIO
+                {% elseif entity.tipoactivo == ACTIVO_EQUIPO %}
+                    EQUIPO
+                {% else %} 
+                    DESCONOCIDO
+                {% endif %}
+            
+            </td>
+        </tr>
+   
+</table>
+<div id="result-busqueda">
+    {% if entity.activos | length > 0 %}
+        {% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+                    {% include 'INHack20MobiliarioBundle:Mobiliario:lista_mobiliarios.html.twig' with { 'entities' : entity.activos, 'orden_id' : entity.id } %}
+                {% elseif entity.tipoactivo == ACTIVO_EQUIPO %}
+                    {% include 'INHack20EquipoBundle:Equipo:lista_equipos.html.twig' with { 'entities' : entity.activos, 'orden_id' : entity.id } %}
+                {% else %} 
+                    DESCONOCIDO
+                {% endif %}
+        
+    {% else %}
+        <br/><br/><br/><br/><br/>
+    <p align="center">
+        <font color='green' size="5px">La orden no tiene activos asociados</font>
+    </p>
+    
+    {% endif %}
+</div>
+        
+
+<table width="100%" border="0">
+  <tr>
+    <td>
+        <a id="anadir-activo" {% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+            href="{{ path('mobiliario_new', { 'orden_id' : entity.id }) }}"
+        {% elseif entity.tipoactivo == ACTIVO_EQUIPO %}    
+            href="{{ path('equipo_new', { 'orden_id' : entity.id }) }}"
+        {% else %}
+            href="#"
+        {% endif %} >
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                 Agregar Activos
+            </button>
+        </a>       
+    </td>
+    <td>
+        <a class="ajaxContenido" href="{{ path('orden_edit', { 'id': entity.id }) }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Agregar" />
+                 Editar
+            </button>
+        </a>  
+    </td>
+  </tr>
+ </table>
+<br/><br/>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $( "#anadir-activo" )
+                .click(function(e) {
+                    e.preventDefault();
+                    cargando();
+                    $("#dialogo-contenido").load($(this).attr('href'),function(){
+                            listoCargado();
+                            $( "#dialogo" ).dialog( "open" );
+                        });
+                                        
+        });
+    });
+</script>
+{% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% endblock %}

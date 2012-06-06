@@ -1,0 +1,52 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block css %}
+{{ parent() }}
+<link rel="stylesheet" type="text/css" href="{{ asset("bundles/mobiliario/css/tabla.css") }}" />
+{% endblock %}
+{% block contenido %}
+{% if entities | length == 0 %}
+<br/><br/><br/>
+<font color='red' size='5px'>No Hay Mobiliarios En El {{ ubicacion.dependencia | title }}.</font>
+{% else%}
+<h1 align='center' class="textoDecorado">Mobiliarios en el {{ ubicacion.dependencia | title }}</h1>
+<br/><br/>
+<table class="records_list tabla-1" align='center'>
+    <thead>
+        <tr>
+            
+            
+            <th>N&deg; Inventario</th>
+            <th>U.T.</th>
+            <th>Descripci&oacute;n</th>
+            <th>Valor</th>
+            <th>Ubicaci&oacute;n</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%}>
+            
+            
+            <td>{{ entity.nroinventario }}</td>
+            <td>{{ entity.unidadtributaria }}</td>
+            <td>{{ entity.descripcion }}</td>
+            <td>{{ entity.valor }}&nbsp;Bs</td>
+            <td>{{ entity.ubicacion.dependencia }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('mobiliario_show', { 'id': entity.id }) }}">Ver</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('mobiliario_edit', { 'id': entity.id }) }}">Editar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endif %}
+{% endblock%}

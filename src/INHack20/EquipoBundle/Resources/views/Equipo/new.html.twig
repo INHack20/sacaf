@@ -1,0 +1,74 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+    A&ntilde;adir Equipo
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">A&ntilde;adir Equipo</h1>
+<br/><br/>
+<form id="frmRegistrar" action="{{ path('equipo_create', { 'orden_id' : orden_id }) }}" method="post" {{ form_enctype(form) }}>
+<table class="tabla-2" border="0" align="center">
+  <tr>
+    <td>{{ form_label(form.activo.nroBienNacional) }}{{ form_errors(form.activo.nroBienNacional) }}</td>
+    <td>{{ form_widget(form.activo.nroBienNacional) }}</td>
+  </tr>
+  <tr>
+    <td> {{ form_label(form.marca) }} {{ form_errors(form.marca) }}</td>
+    <td> {{ form_widget(form.marca) }}</td>
+  </tr>
+  <tr>
+    <td> {{ form_label(form.modelo) }} {{ form_errors(form.modelo) }}</td>
+    <td> {{ form_widget(form.modelo) }}</td>
+  </tr>
+  <tr>
+    <td> {{ form_label(form.serial) }} {{ form_errors(form.serial) }}</td>
+    <td> {{ form_widget(form.serial) }}</td>
+  </tr>
+  <tr>
+    <td> {{ form_label(form.tipoEquipo) }} {{ form_errors(form.tipoEquipo) }}</td>
+    <td> {{ form_widget(form.tipoEquipo) }}</td>
+  </tr>
+  <tr>
+    <td> {{ form_label(form.activo.observacion) }} {{ form_errors(form.activo.observacion) }}</td>
+    <td> {{ form_widget(form.activo.observacion) }}</td>
+  </tr>
+</table>
+        <br/><br/><br/>
+        <table align="center" border="0">
+            <tr>
+                <td>
+                    <table border='1'><tr><td>
+                       <h3>Componentes</h3>
+                        <br/><br/>
+                            <ul class="componentes" data-prototype="<hr><br/><br/><table border='0'><tr><td>{{ form_widget(form.componentes.get('prototype')) | e }}</td></tr></table>">
+                                
+                                {% for componente in form.componentes %}
+                                    <li>{{ form_widget(componente) }}</li>
+                                {% endfor %}
+                            </ul>
+                    </td></tr></table>
+                </td>
+            </tr>
+        </table>
+        <br/><br/><br/>
+        {{ form_widget(form.componentes) }}
+        {{ form_rest(form) }} 
+      
+    <br/>
+    <p align="center">
+        <button type="submit" class="miBoton" >Crear Equipo</button>
+    </p>
+    <br/><br/>
+</form>
+<br/><br/>
+    {% include 'INHack20EquipoBundle:Equipo:collecionFormComponentes.js.twig' %}
+
+
+        {% if orden_id > 0 %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' with {'options' : 'dialogo'} %}
+        {% else %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+        {% endif %}
+    
+
+    
+{% endblock %}

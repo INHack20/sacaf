@@ -1,0 +1,23 @@
+{#
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+#}
+<script type="text/javascript">
+   $(document).ready(function(){
+            
+            $(".ajaxContenido").click(function(e){
+                        e.preventDefault();
+                            cargando();
+                            $("#contenido").load($(this).attr('href'),function(response, status, xhr){
+                                if (status == "error") {
+                                    var msg = "Lo siento ha ocurrido un error: ";
+                                    //$("#contenido").html(msg + xhr.status + " " + xhr.statusText);
+                                    $("#contenido").html(response);
+                                    //url = "http://taller-de-scripts.com.ar";  
+                                    //$(location).attr('href',url)
+                                    //return "oh noes!!!!";
+                                }
+                                listoCargado();
+                             });
+                    });
+    });
+</script>

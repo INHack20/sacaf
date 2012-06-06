@@ -1,0 +1,131 @@
+{# extends "FOSUserBundle::layout.html.twig" #}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link rel="shortcut icon" href="{{ asset("favicon.ico") }}" />
+        <title>Inicio de Sesion - SACAF</title>
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/inhack20user/css/screen.css') }}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset('bundles/inhack20user/css/botones.css') }}" />
+	
+        <script type="text/javascript" src="{{ asset('bundles/inhack20user/js/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/inhack20user/js/jquery.validate.js') }}"></script>
+
+	<script type="text/javascript">
+		
+	$(function() {
+		// highlight 
+		var elements = $("input[type!='submit'], textarea, select");
+		elements.focus(function(){
+			$(this).parents('li').addClass('highlight');
+		});
+		elements.blur(function(){
+			$(this).parents('li').removeClass('highlight');
+		});
+		
+		$("#forgotpassword").click(function() {
+			$("#password").removeClass("required");
+			$("#login").submit();
+			$("#password").addClass("required");
+			return false;
+		});
+		
+		$("#login").validate();
+                
+               <?php 
+               if($error)
+                    echo '$("#c_error").css("display", "block")';
+               else
+                    echo '$("#c_error").css("display", "none")';
+               ?>
+	});
+	</script>
+	
+</head>
+
+{% block fos_user_content %}
+
+<div id="page">
+
+		<div id="header">
+                    <h1>Sistema Automatizado de Control de Activos Fijos.</h1>
+                </div>
+                <div></div>
+
+    <div id="content">
+			<p id="status"></p>
+			<p></p>
+			<table width="306" border="0" align="center">
+                        <tr align="center">
+			    <th width="300" scope="col"><img src="{{ asset('bundles/inhack20user/images/dem.gif') }}" width="216" height="196"></th>
+		      </tr>
+			  <tr>
+			    <td align="center"><strong>Direcci&oacute;n Administrativa Regional</strong></td>
+		      </tr>
+		  </table>
+                        
+                        
+                <form id="login" action="{{ path("fos_user_security_check") }}" method="post">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+			<fieldset>
+                                    <legend>Nombre de Usuario</legend>
+					<ul>
+						<li>
+							<label for="username"><span class="required">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</span></label>
+                                                        <input id="username" name="_username" class="text required" type="text" value="{{ last_username }}"/>
+							<label for="username" class="error">Usted debe ingresar su usuario</label>
+						</li>
+						
+						<li>
+                                                    <label for="password"><span class="required">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</span></label>
+							<input name="_password" type="password" class="text required" id="password" minlength="4" maxlength="20" />
+                                                        <label for="password" class="error">Usted debe ingresar su contrase&ntilde;a</label>
+						</li>
+                                                <li>
+                                                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                                                    <label for="remember_me">{{ 'security.login.remember_me'|trans({}, 'FOSUserBundle') }}</label>
+                                                </li>
+						<li>
+                                                    <label class="centered info"><a id="forgotpassword" href="#">Pista de mi contrase&ntilde;a...</a></label>
+                                                    <div id="c_error">
+                                                        <font color="red">{% if error %}
+                                                                                <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+                                                                            {% endif %}</font>
+                                                    </div>
+						</li>
+					</ul>
+                                        
+				</fieldset>
+				
+				<fieldset class="submit">
+					<p>&nbsp;</p>
+					<table width="200" border="0" align="center">
+                                            <tr align="center">
+                                              <th scope="col">
+                                                  <input type="submit" id="_submit" name="_submit" class="f_boton" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+                                              </th>
+				      </tr>
+				  </table>
+					<p>&nbsp;</p>
+                            </fieldset>
+                              
+                            <div class="">
+                            <table width="148" border="0" align="right">
+				    <tr>
+				      <th width="142" scope="col"><img src="{{ asset('bundles/inhack20user/images/logo_dem.gif') }}" width="124" height="16"></th>
+			        </tr>
+		        </table>
+                                </div>
+                                
+				<div class="clear">
+				  <p>&nbsp;</p>
+				</div>
+			</form>
+			
+    </div>
+</div>    
+    
+
+    
+
+{% endblock fos_user_content %}

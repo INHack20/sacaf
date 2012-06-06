@@ -1,0 +1,45 @@
+{% if pager.hasResults | length > 0 %}
+<h1 class="textoDecorado">Lista de Ubicaciones</h1>
+<br/><br/>
+{% if pager.isPaginable %}
+<table align="right"><tr><td>{{ paginate(pager,'ubicacion') }}</td></tr></table>
+<br/><br/>
+{% endif %}
+<table class="records_list tabla-1" align="center">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Dependencia</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in pager.getResults %}
+        <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%}>
+            <td><a href="{{ path('ubicacion_show', { 'id': entity.id }) }}">{{ loop.index }}</a></td>
+            <td>{{ entity.dependencia }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('ubicacion_show', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                            Ver</a>
+                    </li>
+                    <li>
+                        <a class="ajaxContenido" href="{{ path('ubicacion_edit', { 'id': entity.id }) }}">
+                            <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                            Editar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+    {% if pager.isPaginable %}
+        {{ paginate(pager,'ubicacion') }}
+    {% endif %}
+{% else %}
+    <font color='red'>No existen ubicaciones registradas</font>
+{% endif%}

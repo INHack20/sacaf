@@ -1,0 +1,88 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+    Editar Equipo
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Editar Equipo</h1>
+<br/><br/>
+<form id="frmEditar" action="{{ path('equipo_update', { 'id': entity.id, 'orden_id' : orden_id }) }}" method="post" {{ form_enctype(edit_form) }}>
+  
+    <table border="0" align="center">
+     <tr>
+        <td>{{ form_label(edit_form.activo.nroBienNacional) }}{{ form_errors(edit_form.activo.nroBienNacional) }}</td>
+        <td>{{ form_widget(edit_form.activo.nroBienNacional) }}</td>
+     </tr>
+      <tr>
+        <td> {{ form_label(edit_form.marca) }} {{ form_errors(edit_form.marca) }}</td>
+        <td> {{ form_widget(edit_form.marca) }}</td>
+      </tr>
+      <tr>
+        <td> {{ form_label(edit_form.modelo) }} {{ form_errors(edit_form.modelo) }}</td>
+        <td> {{ form_widget(edit_form.modelo) }}</td>
+      </tr>
+      <tr>
+        <td> {{ form_label(edit_form.serial) }} {{ form_errors(edit_form.serial) }}</td>
+        <td> {{ form_widget(edit_form.serial) }}</td>
+      </tr>
+      <tr>
+        <td> {{ form_label(edit_form.tipoEquipo) }} {{ form_errors(edit_form.tipoEquipo) }}</td>
+        <td> {{ form_widget(edit_form.tipoEquipo) }}</td>
+      </tr>
+      <tr>
+        <td> {{ form_label(edit_form.activo.observacion) }} {{ form_errors(edit_form.activo.observacion) }}</td>
+        <td> {{ form_widget(edit_form.activo.observacion) }}</td>
+       </tr>
+  </table>
+       
+    <br/><br/><br/>
+        <table align="center" border="0">
+            <tr>
+                <td>
+                    <table border='1'><tr><td>
+                        <h3>Componentes</h3>
+                        <br/><br/>
+                            <ul class="componentes" data-prototype="<hr><br/><br/><table border='0'><tr><td>{{ form_widget(edit_form.componentes.get('prototype')) | e }}</td></tr></table>">
+                                
+                                {% for componente in edit_form.componentes %}
+                                    <li>{{ form_widget(componente) }}</li>
+                                {% endfor %}
+                            </ul>
+                    </td></tr></table>
+                </td>
+            </tr>
+        </table>
+        <br/><br/><br/>
+        {{ form_widget(edit_form.componentes) }}
+        {{ form_rest(edit_form) }} 
+     <br/>
+    <br/>
+    
+    <table width="100%" border="0">
+        <tr>
+            <td>
+                <button id="btnGuardar" class="miBoton">
+                    <img src="{{ asset('bundles/inhack20inventario/images/guardar.png') }}" width="24" height="24" alt="Guardar" />
+                    Guardar Cambios
+                </button>
+            </td>
+            <td>
+                <button id="btnEliminar" class="miBoton" type="button">
+                                <img src="{{ asset('bundles/inhack20inventario/images/eliminar.png') }}" width="24" height="24" alt="Eliminar" />
+                                Eliminar</button>
+                </td>
+        </tr>
+    </table>
+</form>
+<form id="frmEliminar" action="{{ path('equipo_delete', { 'id': entity.id, 'orden_id' : orden_id }) }}" method="post">
+    {{ form_widget(delete_form) }}
+</form>
+
+<br/><br/>
+{% include 'INHack20EquipoBundle:Equipo:collecionFormComponentes.js.twig' %}
+   
+        {% if orden_id > 0 %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig'  with {'options' : 'dialogo'}%}
+        {% else %}
+            {% include 'INHack20InventarioBundle:JS:ajaxFrmEditar.js.twig' %}
+        {% endif %}
+{% endblock %}

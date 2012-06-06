@@ -1,0 +1,73 @@
+{% if pager.isPaginable %}
+<table align="right"><tr><td>{{ paginate(pager,'comprobante',{ 'tipo' : tipo, 'accion' : accion }) }}</td></tr></table>
+<br/>
+{% endif %}
+<br/>
+{% if pager.hasResults | length > 0 %}
+<table class="records_list tabla-1" align="center">
+    <thead>
+        <tr>
+            <th>N&deg;</th>
+            <th>Fecha</th>
+            <th>Dependencia Usuaria</th>
+            <th>TIPO</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in pager.getResults %}
+        <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%}>
+            <td><a href="{{ path('comprobante_show', { 'id': entity.id }) }}">{{ loop.index }}</a></td>
+            <td>{% if entity.creado %}{{ entity.creado|date('d/m/Y') }}{% endif%}</td>
+            <td>{% if entity.ubicacion %}{{ entity.ubicacion.dependencia }}{% endif %}</td>
+            <td>{% if entity.tipoactivo == ACTIVO_MOBILIARIO %}
+                    MOBILIARIO
+                {% elseif entity.tipoactivo == ACTIVO_EQUIPO%}
+                    EQUIPO
+                {% else %}
+                    DESCONOCIDO
+                {% endif %}
+            </td>
+            <td>
+                <ul>
+                    {% if accion == 1 %}{# ROLE_ADMIN #}
+                        <li>
+                        <a class="ajaxContenido" href="{{ path('comprobante_show', { 'id': entity.id, 'accion' : accion }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                            Ver
+                        </a>
+                        </li>
+                    <li>
+                         <a class="ajaxContenido" href="{{ path('comprobante_edit', { 'id': entity.id, 'accion' : accion }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                                Editar</a>
+                                                        
+                    </li>
+                    {% elseif accion == 2 %}{# ROLE_SUPER_USER#}
+                        <li>
+                            <a class="ajaxContenido" href="{{ path('comprobante_show', { 'id': entity.id, 'accion' : accion }) }}">
+                                    <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                                Ver</a>
+
+                        </li>
+                    {% elseif accion == 3 %}{# ROLE_USER en Reporte #}
+                        <li>
+                            <a target="_blank" href="{{ path('comprobante_reporte', { 'id': entity.id, 'accion' : accion }) }}">
+                                    <img src="{{ asset('bundles/inhack20inventario/images/pdf.png') }}" width="24" height="24" alt="Ver" />
+                                    Ver</a>
+
+                        </li>
+                    {% endif %}
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table><br/>
+    {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+{% if pager.isPaginable %}
+    {{ paginate(pager,'comprobante',{ 'tipo' : tipo, 'accion' : accion }) }}
+{% endif %}
+{% else %}
+    <font color="green" size="5px">No se encontraron comprobantes.</font>
+{% endif%}

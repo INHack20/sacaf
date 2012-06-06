@@ -1,0 +1,19 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+    Tipo de Componente
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Tipo de Componente</h1>
+<br/><br/>
+<form id="frmRegistrar" action="{{ path('tipocomponente_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form, { 'attr' : { 'align' : 'center' } }) }}
+     <br/>
+    <p align="center">
+        <button type="submit" class="miBoton" >Crear</button>
+    </p>
+    <br/><br/>
+</form>
+
+<br/><br/>
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+{% endblock %}

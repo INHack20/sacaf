@@ -1,0 +1,12 @@
+{% block field_row %}
+    {% spaceless %}
+        <div class="{% if class is defined %}{{ class }} busqueda{% endif %}">
+            <table border="0">
+                <tr>
+                    <td>{{ form_label(form) }}{{ form_errors(form) }}</td>
+                    <td>{{ form_widget(form) }}</td>
+                </tr>
+            </table>   
+        </div>
+    {% endspaceless %}
+{% endblock field_row %}

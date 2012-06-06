@@ -1,0 +1,41 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% block css %}
+{{ parent() }}
+    {% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block fos_user_content %}
+    {% include 'FOSUserBundle:Profile:show_content.html.twig' with {'user' : usuario} %}
+    
+    <table align="center" border="0">
+  <tr>
+    <td>
+        <a class="ajaxContenido" href="{{ path('fos_user_change_password_usuario', { 'id': usuario.id }) }}">
+                    <button class="miBoton-2" >
+                        <img src="{{ asset('bundles/inhack20inventario/images/cambiarContrasena.png') }}" width="24" height="24" alt="Agregar" />
+                        Cambiar Contrase&ntilde;a
+                    </button>
+        </a>  
+    </td>
+  </tr>
+</table>
+    <br/><br/><br/>
+    <table width="100%" border="0">
+        <tr>
+            <td>
+                <a class="ajaxContenido" href="{{ path('fos_user_editar_usuario', { 'id': usuario.id }) }}">
+                    <button class="miBoton" >
+                        <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Agregar" />
+                        Editar
+                    </button>
+                 </a>  
+            </td>
+            <td>
+               <a class="ajaxContenido" href="{{ path('fos_user_lista_usuarios') }}">
+                    <button class="miBoton" >
+                        <img src="{{ asset('bundles/inhack20inventario/images/regresar.png') }}" width="24" height="24" alt="Regresar" />
+                        Regresar
+                    </button>
+                 </a>  
+        </tr>
+    </table>
+{% endblock fos_user_content %}

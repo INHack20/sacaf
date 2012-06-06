@@ -1,0 +1,27 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+Registrar Nueva Orden
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Registrar Nueva Orden</h1>
+<br/><br/><br/>
+
+<form id="frmRegistrar" action="{{ path('orden_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form)}}
+    <br/><br/>
+    <p align='center'>
+        <button type="submit" class="miBoton">Registrar</button>
+    </p>
+</form>
+
+{% endblock%}
+{% block javascripts %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".fecha1").datepicker();
+        $(".fecha2").datepicker();
+        $(".fecha3").datepicker();
+    });
+</script>
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+{% endblock%}

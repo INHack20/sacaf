@@ -1,0 +1,45 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+    Componente
+{% endblock %}
+{% block css %}
+    {{ parent() }}
+{% include 'INHack20InventarioBundle:Principal:formatotabla.html.twig' %}
+{% endblock %}
+{% block contenido %}
+<h1 class="textoDecorado">Componente</h1>
+<br/><br/>
+<table align="center" class="record_properties tabla-1">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Descripcion</th>
+            <td>{{ entity.descripcion }}</td>
+        </tr>
+    </tbody>
+</table>
+<br/><br/>
+<table width="100%" border="0">
+  <tr>
+    <td>
+       <a href="{{ path('componente_edit', { 'id': entity.id }) }}">
+            <button class="miBoton" >
+                <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Agregar" />
+                Editar
+            </button>
+        </a>
+    </td>
+    <td>
+        <form action="{{ path('componente_delete', { 'id': entity.id }) }}" method="post">
+                    {{ form_widget(delete_form) }}
+                    <button class="miBoton" type="submit">
+                        <img src="{{ asset('bundles/inhack20inventario/images/eliminar.png') }}" width="24" height="24" alt="Eliminar" />
+                        Eliminar</button>
+        </form>
+        </td>
+  </tr>
+</table>
+{% endblock %}

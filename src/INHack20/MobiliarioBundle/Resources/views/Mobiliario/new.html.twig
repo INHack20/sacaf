@@ -1,0 +1,36 @@
+{% extends app.request.isXmlHttpRequest ? 'INHack20InventarioBundle::base_ajax.html.twig' : 'INHack20InventarioBundle::base.html.twig' %}
+{% block titulo %}
+    A&ntilde;adir Mobiliario
+{% endblock %}
+{% block contenido %}
+<h1 align='center' class="textoDecorado">A&ntilde;adir Mobiliario</h1>
+<br/><br/>
+<form id="frmRegistrar" action="{{ path('mobiliario_create', { 'orden_id' : orden_id }) }}" method="post" {{ form_enctype(form) }}>
+    <table class="tabla-2" border="0" align="center">
+        <tr>
+            <td width="126px">{{ form_label(form.activo.nroBienNacional) }}</td>
+            <td>{{ form_widget(form.activo.nroBienNacional) }}{{ form_errors(form.activo.nroBienNacional) }}</td>
+        </tr>
+        <tr>
+            <td> {{ form_label(form.activo.observacion) }}</td>
+            <td> {{ form_widget(form.activo.observacion) }}{{ form_errors(form.activo.observacion) }}</td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                {{ form_widget(form) }}
+            </td>
+        </tr>
+    </table> 
+    <br/>
+    <p align='center'>
+        <button type="submit" class="miBoton">A&ntilde;adir</button>
+    </p>
+</form>
+<br/><br/>
+{% if orden_id > 0 %}
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' with {'options' : 'dialogo'} %}
+{% else %}
+    {% include 'INHack20InventarioBundle:JS:ajaxFrmRegistrar.js.twig' %}
+{% endif %}
+
+{% endblock%}

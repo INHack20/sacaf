@@ -1,0 +1,108 @@
+{% if estatus is not defined %}
+        {% set estatus = '' %}
+    {% endif %}
+    {% if comprobante_id is not defined %}
+        {% set comprobante_id = 0 %}
+    {% endif %}
+{% if pager.isPaginable %}
+<table align="right"><tr><td>{{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id }) }}</td></tr></table>
+<br/>
+{% endif %}
+<br/>
+{% if pager.hasResults | length > 0 %}
+<table class="records_list tabla-1" align='center'>
+    <thead>
+        <tr>
+            <th>N&deg; Inventario</th>
+            <th>U.T.</th>
+            <th>Descripci&oacute;n</th>
+            <th>Valor</th>
+            <th>Ubicaci&oacute;n</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in pager.getResults %}
+        <tr {% if loop.index % 2 == 0 %}class="odd"{% endif%}>
+            
+            
+            <td>{{ entity.activo.nroBienNacional }}</td>
+            <td>{{ entity.unidadtributaria }}</td>
+            <td>{{ entity.descripcion }}</td>
+            <td>{{ entity.valor }}&nbsp;Bs</td>
+            <td>{% if entity.activo.ubicacion %}{{ entity.activo.ubicacion.dependencia }}{% endif %}</td>
+            <th>
+                {% if comprobante is defined %}    
+                    {% if entity.activo.ubicacion %}
+                        {% if(entity.activo.ubicacion.dependencia != comprobante.ubicacion.dependencia or comprobante.tipo != entity.activo.estatus ) %}
+                            <a class="ajaxResult-activos" href="{{ path('comprobante_asociar_activo',{ 'id_comprobante' : comprobante.id, 'id_activo' : entity.activo.id, 'accion' : accion }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                            </a>
+                        {% else %}
+                            <img src="{{ asset('bundles/inhack20inventario/images/listo.png') }}" width="24" height="24" alt="Listo" />
+                        {% endif %}
+                     {%else%}
+                            <a class="ajaxResult-activos" href="{{ path('comprobante_asociar_activo',{ 'id_comprobante' : comprobante.id, 'id_activo' : entity.activo.id, 'accion' : accion }) }}">
+                                <img src="{{ asset('bundles/inhack20inventario/images/agregar.png') }}" width="24" height="24" alt="Agregar" />
+                            </a>
+                     {% endif %}
+                 {% else %}
+                       <ul>
+                            {% if accion == 1 %}{# ROLE_ADMIN #}
+                                <li>
+                                <a class="ajaxContenido" href="{{ path('mobiliario_show', { 'id': entity.id, 'accion' : accion }) }}">
+                                        <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                                    Ver
+                                </a>
+                                </li>
+                            <li>
+                                <a class="ajaxContenido" href="{{ path('mobiliario_edit', { 'id': entity.id, 'accion' : accion }) }}">
+                                        <img src="{{ asset('bundles/inhack20inventario/images/modificar.png') }}" width="24" height="24" alt="Editar" />
+                                        Editar</a>
+
+                            </li>
+                            {% elseif accion == 2 %}{# ROLE_SUPER_USER#}
+                                <li>
+                                    <a class="ajaxContenido" href="{{ path('mobiliario_show', { 'id': entity.id, 'accion' : accion }) }}">
+                                            <img src="{{ asset('bundles/inhack20inventario/images/ver.png') }}" width="24" height="24" alt="Ver" />
+                                        Ver</a>
+
+                                </li>
+                            {% elseif accion == 3 %}{# ROLE_USER en Reporte #}
+                                <li>
+                                    ...
+
+                                </li>
+                            {% endif %}
+                        </ul>
+                 {% endif %}
+            </th>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% if pager.isPaginable %}
+    {{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id }) }}
+{% endif %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        {% if comprobante is defined %}
+            $(".ajaxResult-activos").click(function(e){
+                            e.preventDefault();
+                            
+                                cargando();
+                                $("#result-activos").load($(this).attr('href'),function(){
+                                    $( "#dialog-form" ).dialog( "close" );
+                                    listoCargado();
+                                });
+            });
+          {% else %}
+                {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
+          {% endif %}
+    });
+</script>
+
+{% else %}
+    <font color="green" size="5px">No se encontraron mobiliarios.</font>
+{% endif%}
