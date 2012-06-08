@@ -23,7 +23,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     form:
-      resources: ['form_table_layout.html.twig']
+      resources: ['INHack20InventarioBundle:Form:fields_global.html.twig']
     globals:
       #Tipo de comprobantes
       COMPROBANTE_ENTREGA : %COMPROBANTE_ENTREGA%

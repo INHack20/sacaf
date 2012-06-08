@@ -40,7 +40,7 @@ class MobiliarioController extends Controller
         $accion = $request->query->get('accion');
         $estatus = $request->query->get('estatus');
         
-        $form_buscar = $this->createForm(new BuscarMobiliarioType(),null,array('attr' => array('estado' => $this->getUser()->getEstado()->getId())));
+        $form_buscar = $this->createForm(new BuscarMobiliarioType(),null,array('attr' => array('estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         //si es una peticion Ajax
         if($request->isXmlHttpRequest())
             {
@@ -168,7 +168,7 @@ class MobiliarioController extends Controller
     public function newAction($orden_id)
     {
         $entity = new Mobiliario();
-        $form = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $form = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         
         return array(
             'entity' => $entity,
@@ -188,7 +188,7 @@ class MobiliarioController extends Controller
     {
         $entity  = new Mobiliario();
         $request = $this->getRequest();
-        $form    = $this->createForm(new MobiliarioType(), $entity,array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $form    = $this->createForm(new MobiliarioType(), $entity,array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $form->bindRequest($request);
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
@@ -243,7 +243,7 @@ class MobiliarioController extends Controller
             throw $this->createNotFoundException('Unable to find Mobiliario entity.');
         }
 
-        $editForm = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $editForm = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -272,7 +272,7 @@ class MobiliarioController extends Controller
             throw $this->createNotFoundException('Unable to find Mobiliario entity.');
         }
 
-        $editForm   = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $editForm   = $this->createForm(new MobiliarioType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();

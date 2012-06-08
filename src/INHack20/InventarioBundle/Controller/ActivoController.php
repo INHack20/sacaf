@@ -25,7 +25,7 @@ class ActivoController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('INHack20InventarioBundle:Activo')->findAll();
 
@@ -42,7 +42,7 @@ class ActivoController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20InventarioBundle:Activo')->find($id);
 
@@ -90,7 +90,7 @@ class ActivoController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
 
@@ -111,7 +111,7 @@ class ActivoController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20InventarioBundle:Activo')->find($id);
 
@@ -138,7 +138,7 @@ class ActivoController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20InventarioBundle:Activo')->find($id);
 
@@ -181,7 +181,7 @@ class ActivoController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('INHack20InventarioBundle:Activo')->find($id);
 
             if (!$entity) {
@@ -260,12 +260,12 @@ class ActivoController extends Controller
             }
         $activos = $qb->getQuery()->getResult();
         
-        new ReporteInventario($tipoActivo,$ubicacion,$activos,$this->container,$this->getUser(),$estatus,$this->getUser());
+        new ReporteInventario($tipoActivo,$ubicacion,$activos,$this->container,$this->container->get('security.context')->getToken()->getUser(),$estatus,$this->container->get('security.context')->getToken()->getUser());
         return new Response('', 200, array('Content-Type' => 'application/pdf'));
     }
     
     private function createFormInventario(){
-        $estado = $this->getUser()->getEstado();
+        $estado = $this->container->get('security.context')->getToken()->getUser()->getEstado();
         return $this->createFormBuilder()
                 ->add('dependencia','entity',array(
                     'class' => 'INHack20\InventarioBundle\Entity\Ubicacion', 

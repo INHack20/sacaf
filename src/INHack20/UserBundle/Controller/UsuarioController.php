@@ -16,7 +16,7 @@ class UsuarioController extends Controller{
      * @Route("/lista",name="fos_user_lista_usuarios")
      */
     public function listaAction(){
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $usuarios = $em->getRepository('INHack20UserBundle:User')->findAll();
         return $this->render('INHack20UserBundle:Usuario:lista.html.twig',array(
             'usuarios' => $usuarios,
@@ -30,7 +30,7 @@ class UsuarioController extends Controller{
      */
     public function verAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $usuario = $em->getRepository('INHack20UserBundle:User')->find($id);
         if(!$usuario){
             throw $this->createNotFoundException('No se ha encontrado el usuario especificado');
@@ -46,7 +46,7 @@ class UsuarioController extends Controller{
      * @Route("/{id}/editar",name="fos_user_editar_usuario")
      */
     public function editar($id){
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $usuario = $em->getRepository('INHack20UserBundle:User')->find($id);
         if(!$usuario){
             throw $this->createNotFoundException('No se ha encontrado el usuario especificado');
@@ -68,7 +68,7 @@ class UsuarioController extends Controller{
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $usuario = $em->getRepository('INHack20UserBundle:User')->find($id);
         if(!$usuario){
             throw $this->createNotFoundException('No se ha encontrado el usuario especificado');

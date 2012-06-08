@@ -24,7 +24,7 @@ class ComponenteController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('INHack20EquipoBundle:Componente')->findAll();
 
@@ -41,7 +41,7 @@ class ComponenteController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:Componente')->find($id);
 
@@ -90,7 +90,7 @@ class ComponenteController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             
             $equipo = $em->getRepository('INHack20EquipoBundle:Equipo')->find($equipo_id);
 
@@ -126,7 +126,7 @@ class ComponenteController extends Controller
      */
     public function editAction($equipo_id,$id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:Componente')->find($id);
 
@@ -154,7 +154,7 @@ class ComponenteController extends Controller
      */
     public function updateAction($equipo_id,$id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:Componente')->find($id);
 
@@ -212,7 +212,7 @@ class ComponenteController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('INHack20EquipoBundle:Componente')->find($id);
 
             if (!$entity) {

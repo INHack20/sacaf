@@ -30,7 +30,7 @@ class OrdenType extends AbstractType
                 'label' => 'Tipo de Activo',
                 'choices' => array('1' => 'MOBILIARIO', '2' => 'EQUIPO'),
                 'empty_value' => 'Seleccione',
-                'disabled' => isset($options['attr']['disabled'])? $options['attr']['disabled'] : false,
+                'attr' => array(isset($options['attr']['disabled'])? 'disabled' : false),
             ))
          ;
     }

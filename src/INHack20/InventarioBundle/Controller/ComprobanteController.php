@@ -352,7 +352,7 @@ class ComprobanteController extends Controller
     public function asociarActivoAction($id_comprobante,$id_activo)
     {
         $request= $this->getRequest();
-        $em= $this->getDoctrine()->getManager();
+        $em= $this->getDoctrine()->getEntityManager();
         $comprobante= $em->getRepository('INHack20InventarioBundle:Comprobante')->find($id_comprobante);
         $activo= $em->getRepository('INHack20InventarioBundle:Activo')->find($id_activo);
         
@@ -419,7 +419,7 @@ class ComprobanteController extends Controller
      */
     public function removerActivo($comprobante_id,$activo_id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $request = $this->getRequest();
         $comprobante = $em->getRepository('INHack20InventarioBundle:Comprobante')->find($comprobante_id);
             if(!$comprobante){

@@ -31,7 +31,7 @@ class FirmaController extends Controller
 
         $qb= $em->getRepository('INHack20InventarioBundle:Firma')->createQueryBuilder('f')
                 ->where('f.estado = :est')
-                ->setParameter('est', $this->getUser()->getEstado())
+                ->setParameter('est', $this->container->get('security.context')->getToken()->getUser()->getEstado())
                 ->orderBy('f.actualizado', 'DESC')
                 ->setMaxResults(30)
                 ;
@@ -88,15 +88,15 @@ class FirmaController extends Controller
         $entity = new Firma();
         if($id!=0)
         {
-            $em= $this->getDoctrine()->getManager();
+            $em= $this->getDoctrine()->getEntityManager();
             $ubicacion= $em->getRepository('INHack20InventarioBundle:Ubicacion')->find($id);
             if(!$ubicacion)
                 throw $this->createNotFoundException('Unable to find Ubicacion entity.');
             $entity->setUbicacion ($ubicacion);
-            $form   = $this->createForm(new FirmaType(), $entity,array('attr' => array('disabled' => true,'estado' => $this->getUser()->getEstado()->getId())));
+            $form   = $this->createForm(new FirmaType(), $entity,array('attr' => array('disabled' => true,'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         }
         else
-            $form   = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+            $form   = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
 
         return array(
             'entity' => $entity,
@@ -118,11 +118,11 @@ class FirmaController extends Controller
     {
         $entity  = new Firma();
         $request = $this->getRequest();
-        $form    = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $form    = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em= $this->getDoctrine()->getManager();
+            $em= $this->getDoctrine()->getEntityManager();
             if($id!=0)
                 { 
                     $ubicacion= $em->getRepository('INHack20InventarioBundle:Ubicacion')->find($id);
@@ -130,7 +130,7 @@ class FirmaController extends Controller
                         throw $this->createNotFoundException('Unable to find Ubicacion entity.');
                     $entity->setUbicacion ($ubicacion);
                  }
-            $entity->setEstado($this->getUser()->getEstado());
+            $entity->setEstado($this->container->get('security.context')->getToken()->getUser()->getEstado());
             $em->persist($entity);
             $em->flush();
             
@@ -176,7 +176,7 @@ class FirmaController extends Controller
             throw $this->createNotFoundException('Unable to find Firma entity.');
         }
 
-        $editForm = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $editForm = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -204,7 +204,7 @@ class FirmaController extends Controller
             throw $this->createNotFoundException('Unable to find Firma entity.');
         }
 
-        $editForm   = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->getUser()->getEstado()->getId())));
+        $editForm   = $this->createForm(new FirmaType(), $entity, array('attr' => array( 'estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -212,7 +212,7 @@ class FirmaController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
-            $entity->setEstado($this->getUser()->getEstado());
+            $entity->setEstado($this->container->get('security.context')->getToken()->getUser()->getEstado());
             $em->persist($entity);
             $em->flush();
             if($request->isXmlHttpRequest())

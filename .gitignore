@@ -9,6 +9,7 @@ app/bootstrap*
 *.out
 *.rar
 *.sql
+*.tar.*
 
 # Symfony directories
 */logs/*

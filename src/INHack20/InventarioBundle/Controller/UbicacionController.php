@@ -34,7 +34,7 @@ class UbicacionController extends Controller
         
         $qb= $em->getRepository('INHack20InventarioBundle:Ubicacion')->createQueryBuilder('u')
                 ->where('u.estado = :e')
-                ->setParameter('e', $this->getUser()->getEstado())
+                ->setParameter('e', $this->container->get('security.context')->getToken()->getUser()->getEstado())
                 ->orderBy('u.actualizado', 'DESC')
                 ->setMaxResults(20)
                 ;

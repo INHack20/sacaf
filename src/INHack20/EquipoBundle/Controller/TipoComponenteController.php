@@ -24,7 +24,7 @@ class TipoComponenteController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('INHack20EquipoBundle:TipoComponente')->findAll();
 
@@ -41,7 +41,7 @@ class TipoComponenteController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:TipoComponente')->find($id);
 
@@ -89,7 +89,7 @@ class TipoComponenteController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
             if($request->isXmlHttpRequest())
@@ -112,7 +112,7 @@ class TipoComponenteController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:TipoComponente')->find($id);
 
@@ -139,7 +139,7 @@ class TipoComponenteController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:TipoComponente')->find($id);
 
@@ -184,7 +184,7 @@ class TipoComponenteController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('INHack20EquipoBundle:TipoComponente')->find($id);
 
             if (!$entity) {

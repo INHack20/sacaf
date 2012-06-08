@@ -23,7 +23,7 @@ class EstadoController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('INHack20InventarioBundle:Estado')->findAll();
 
@@ -40,7 +40,7 @@ class EstadoController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20InventarioBundle:Estado')->find($id);
 

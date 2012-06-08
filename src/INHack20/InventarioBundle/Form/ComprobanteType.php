@@ -11,12 +11,12 @@ class ComprobanteType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
-            ->add('ubicacion','entity',array('label' => 'Ubicaci&oacute;n',
+            ->add('ubicacion','entity',array(
+                    'label' => 'Ubicaci&oacute;n',
                     'class' => 'INHack20\InventarioBundle\Entity\Ubicacion',
                     'property' => 'dependencia',
-                    'attr' => array('style' => 'width:400px;font-size:9px'),
+                    //'attr' => array('style' => 'width:400px;font-size:9px'),
                     'empty_value' => 'Seleccione',
-                    //'disabled' => isset($options['attr']['disabled'])?$options['attr']['disabled'] : false,
                     'query_builder' => function(EntityRepository $er) use ($options){
                         return $er->createQueryBuilder('u')
                                 ->where('u.estado = :estado')

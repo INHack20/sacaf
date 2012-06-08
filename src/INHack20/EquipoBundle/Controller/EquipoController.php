@@ -28,7 +28,7 @@ class EquipoController extends Controller
      */
     public function indexAction($comprobante_id,$page)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         
         $qb= $em->getRepository('INHack20EquipoBundle:Equipo')->createQueryBuilder('e')
                 ->join('e.activo', 'a');
@@ -38,7 +38,7 @@ class EquipoController extends Controller
         $accion = $request->query->get('accion');
         $estatus = $request->query->get('estatus');
         
-        $form_buscar = $this->createForm(new \INHack20\EquipoBundle\Form\BuscarEquipoType(),null,array('attr' => array('estado' => $this->getUser()->getEstado()->getId())));
+        $form_buscar = $this->createForm(new \INHack20\EquipoBundle\Form\BuscarEquipoType(),null,array('attr' => array('estado' => $this->container->get('security.context')->getToken()->getUser()->getEstado()->getId())));
         //si es una peticion Ajax
         if($request->isXmlHttpRequest())
             {
@@ -150,7 +150,7 @@ class EquipoController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         $request = $this->getRequest();
         $accion = $request->query->get('accion');
         $entity = $em->getRepository('INHack20EquipoBundle:Equipo')->find($id);
@@ -205,7 +205,7 @@ class EquipoController extends Controller
         echo count($entity->getComponentes());
         die;
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             
             $activo=$entity->getActivo();
             $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
@@ -250,7 +250,7 @@ class EquipoController extends Controller
      */
     public function editAction($orden_id,$id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('INHack20EquipoBundle:Equipo')->find($id);
 
@@ -279,7 +279,7 @@ class EquipoController extends Controller
      */
     public function updateAction($orden_id,$id)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getEntityManager();
         
         $entity = $em->getRepository('INHack20EquipoBundle:Equipo')->find($id);
 
@@ -341,7 +341,7 @@ class EquipoController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+            $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('INHack20EquipoBundle:Equipo')->find($id);
 
             if (!$entity) {

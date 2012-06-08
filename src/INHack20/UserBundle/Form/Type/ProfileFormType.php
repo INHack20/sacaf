@@ -38,12 +38,14 @@ class ProfileFormType extends BaseType
                     'class' => 'INHack20\InventarioBundle\Entity\Firma',
                     'property' => 'descripcion',
                     'empty_value' => 'Seleccione',
+                    'required' => false,
                 ))
                 ->add('firmaDivision','entity',array(
                     'label' => 'Firma Jefe Division',
                     'class' => 'INHack20\InventarioBundle\Entity\Firma',
                     'property' => 'descripcion',
                     'empty_value' => 'Seleccione',
+                    'required' => false,
                 ))
                 ;
     }

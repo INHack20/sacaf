@@ -15,6 +15,7 @@ group:
 "Bad credentials": Usuario o contraseña invalido
 "User account is disabled." : Su cuenta esta deshabilitada
 "User account is locked." : Su cuenta esta bloqueada
+"The presented password is invalid." : La contraseña ingresada es invalida
 
 security:
     login:

@@ -23,7 +23,7 @@ class ComponenteType extends AbstractType
         ;
     }
     
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'data_class' => 'INHack20\EquipoBundle\Entity\Componente',

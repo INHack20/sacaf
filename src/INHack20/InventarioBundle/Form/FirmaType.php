@@ -25,8 +25,8 @@ class FirmaType extends AbstractType
             ->add('ubicacion','entity',array('label' => 'Ubicaci&oacute;n',
                 'class' => 'INHack20\InventarioBundle\Entity\Ubicacion',
                 'property' => 'dependencia',
-                'attr' => array('style' => 'width:500px;font-size:9px'),
-                //'disabled' => isset($options['attr']['disabled'])? $options['attr']['disabled'] : false,
+                //'attr' => array('style' => 'width:500px;font-size:9px'),
+                'attr' => array(isset($options['attr']['disabled'])? 'disabled' : false),
                 'empty_value' => 'Seleccione',
                 'query_builder' => function(EntityRepository $er) use ($options){
                         return $er->createQueryBuilder('u')
