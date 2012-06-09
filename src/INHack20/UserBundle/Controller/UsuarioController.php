@@ -51,7 +51,7 @@ class UsuarioController extends Controller{
         if(!$usuario){
             throw $this->createNotFoundException('No se ha encontrado el usuario especificado');
         }
-        
+        //$usuario->setRoleUser();
         $form = $this->createForm(new \INHack20\UserBundle\Form\UserType(),$usuario);
         
         return $this->render('FOSUserBundle:Usuario:edit.html.'.$this->container->getParameter('fos_user.template.engine'),
@@ -75,7 +75,6 @@ class UsuarioController extends Controller{
         }
         $request = $this->getRequest();
         $form = $this->createForm(new \INHack20\UserBundle\Form\UserType(),$usuario);
-        
         $form->bindRequest($request);
             if($form->isValid())
             {

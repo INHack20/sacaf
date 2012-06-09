@@ -4,13 +4,18 @@ namespace INHack20\UserBundle\Entity;
 
 use FOS\UserBundle\Entity\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="Usuario")
+ * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
 {
+    private $roles_definidos = array('ROLE_SUPER_ADMIN','ROLE_USER','ROLE_SUPER_USER','ROLE_ADMIN');
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -61,10 +66,14 @@ class User extends BaseUser
      */
     private $firmaDivision;
     
+    /**
+     * Variable para asignar rol al usuario
+     */
+    private $role;
+
     public function __construct()
     {
         parent::__construct();
-        // your own logic
     }
 
     /**
@@ -256,5 +265,51 @@ class User extends BaseUser
     public function getFirmaDivision()
     {
         return $this->firmaDivision;
+    }
+    
+    public function getRole() {
+        return $this->role;
+    }
+
+    public function setRole($role) {
+        $this->role = $role;
+        if($role!=NULL && $role!='')
+            $this->updateRoleUser();
+    }
+    
+    /**
+     * Permite actualizar el rol seleccionado en el Formulario de UserType
+     * ORM\preUpdate
+     */
+    public function updateRoleUser(){
+        
+        foreach($this->getRoles() as $rol)
+            {
+                if($this->hasRole($rol))
+                    $this->removeRole ($rol);
+            }
+        if(!$this->hasRole($this->role))
+        {
+            $this->addRole($this->role);
+        }
+    }
+    /**
+     * setea el rol del usuario actual
+     * @ORM\postLoad
+     */
+    public function setRoleUser()
+    {
+        if(count($this->getRoles())==1){
+            $this->setRole(static::ROLE_DEFAULT);
+        }
+        else{
+            foreach($this->getRoles() as $rol)
+                {
+                    if($this->hasRole($rol) && $rol!=static::ROLE_DEFAULT){
+                        $this->setRole($rol);
+                    }
+                }
+        }
+        
     }
 }

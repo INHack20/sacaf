@@ -84,7 +84,7 @@ class RegistrationController extends BaseController
                 throw new AccessDeniedException('This user does not have access to this section.');
             }
         */
-        return $this->redirect($this->generateUrl('fos_user_lista_usuarios'));
+        return new RedirectResponse($this->container->get('router')->generate('fos_user_lista_usuarios'));
     }
     
     /**

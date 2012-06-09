@@ -27,20 +27,30 @@ class UserType extends AbstractType
                     'class' => 'INHack20\InventarioBundle\Entity\Firma',
                     'property' => 'descripcion',
                     'empty_value' => 'Seleccione',
+                    'required' => false,
             ))
             ->add('firmaDivision','entity',array(
                 'label' => 'Firma Jefe Division',
                     'class' => 'INHack20\InventarioBundle\Entity\Firma',
                     'property' => 'descripcion',
                     'empty_value' => 'Seleccione',
+                    'required' => false,
             ))
-            ->add('roles')
             ->add('enabled',null,array(
                 'required' => false,
             ))
             ->add('locked',null,array(
                 'required' => false,
             ))
+            ->add('role', 'choice' , array(
+                'choices' => array(
+                    '' => 'Seleccione',
+                    'ROLE_USER' => 'USUARIO',
+                    'ROLE_SUPER_USER' => 'SUPER USUARIO',
+                    'ROLE_ADMIN' => 'ADMINISTRADOR',
+                    'ROLE_SUPER_ADMIN' => 'SUPER ADMINISTRADOR',
+                    ),
+                ))
         ;
        
     }
