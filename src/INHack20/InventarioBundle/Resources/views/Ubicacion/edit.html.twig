@@ -6,9 +6,7 @@
 <form id="frmEditar" action="{{ path('ubicacion_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
     <br/><br/>
-   
-</form>
-<table width="100%" border="0">
+   <table width="100%" border="0">
   <tr>
     <td>
         <button id="btnGuardar" class="miBoton">
@@ -23,7 +21,7 @@
     </td>
   </tr>
 </table>
-
+</form>
 <form id="frmEliminar" action="{{ path('ubicacion_delete', { 'id': entity.id }) }}" method="post">
                     {{ form_widget(delete_form) }}
 </form>

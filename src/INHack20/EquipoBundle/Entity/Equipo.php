@@ -225,9 +225,9 @@ class Equipo
         return $this->activo;
     }
     
-    public function setComponentes(ArrayCollection $componentes)
+    public function setComponentes($componentes)
     {
-        foreach ($componentes as $componente) {
+        foreach ($componentes->toArray() as $componente) {
             $componente->setEquipo($this);
         }
         $this->componentes = $componentes;

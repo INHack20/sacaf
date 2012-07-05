@@ -202,8 +202,6 @@ class EquipoController extends Controller
         $request = $this->getRequest();
         $form    = $this->createForm(new EquipoType(), $entity);
         $form->bindRequest($request);
-        echo count($entity->getComponentes());
-        die;
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             
@@ -230,7 +228,7 @@ class EquipoController extends Controller
                     return $this->forward('INHack20EquipoBundle:Equipo:show', array('id' => $entity->getId()),array('accion' => $this->container->getParameter('OPERACIONES')));
              }
              else
-                 $this->redirect ($this->generateUrl('equipo_show',array(
+                 return $this->redirect ($this->generateUrl('equipo_show',array(
                      'id' => $entity->getId(),
                      'accion' => $this->container->getParameter('OPERACIONES'))));
         }
@@ -238,6 +236,7 @@ class EquipoController extends Controller
         return array(
             'entity' => $entity,
             'form'   => $form->createView(),
+             'orden_id' => $orden_id,
         );
     }
 

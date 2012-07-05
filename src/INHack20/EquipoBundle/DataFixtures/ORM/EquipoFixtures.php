@@ -36,7 +36,7 @@ class EquipoFixtures implements FixtureInterface{
         $manager->persist($tipoEquipo);
         
         $tipoEquipo = new TipoEquipo();
-        $tipoEquipo->setDescripcion('LAPTO');
+        $tipoEquipo->setDescripcion('LAPTOP');
         $manager->persist($tipoEquipo);
         
         $tipoEquipo = new TipoEquipo();

@@ -62,7 +62,6 @@ class Firma
     /**
      * @ORM\ManyToOne(targetEntity="Estado")
      * @ORM\JoinColumn(name="estado_id", referencedColumnName="id")
-     * @Assert\Type(type="INHack20InventarioBundle\Entity\Ubicacion")
      */
     protected $estado;
         

@@ -7,6 +7,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use INHack20\InventarioBundle\Entity\Estado;
 
 
+
 /**
  * Description of InventarioFixtures
  *
@@ -15,10 +16,6 @@ use INHack20\InventarioBundle\Entity\Estado;
 class InventarioFixtures implements FixtureInterface{
     
 public function load(ObjectManager $manager) {
-        
-        $estado = new Estado();
-        $estado->setDescripcion('Amazonas');
-        $manager->persist($estado);
         
         $estado = new Estado();
         $estado->setDescripcion('Anzoátegui');

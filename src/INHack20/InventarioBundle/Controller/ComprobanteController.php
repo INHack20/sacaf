@@ -109,7 +109,6 @@ class ComprobanteController extends Controller
                  'required' => false,
                  'label' => 'Ubicaci&oacute;n',
                  'empty_value' => 'Seleccione',
-                 'attr' => array('style' => 'width:400px;font-size:9px'),
                  'class' => 'INHack20\InventarioBundle\Entity\Ubicacion',
                  'property' => 'dependencia',
                  'query_builder' => function(\Doctrine\ORM\EntityRepository $er) use ($estado){

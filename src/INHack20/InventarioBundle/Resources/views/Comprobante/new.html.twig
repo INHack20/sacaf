@@ -16,13 +16,13 @@
 <form id="frmRegistrar" class="tabla-2" action="{{ path('comprobante_create') }}" method="post" {{ form_enctype(form) }}>
         {{ form_row(form._token) }}           
         {{ form_row(form.tipo) }}           
-    <table border="0" align="center" cellpadding="2" cellspacing="2">
+     <table border="0" align="center" cellpadding="2" cellspacing="2">
                     
                     <tr>
                       <th colspan="2" bgcolor="#CCCCCC">DEPENDENCIA USUARIA</th>
                     </tr>
                     <tr>
-                        <td class="field" colspan="2">{{ form_row(form.ubicacion) }}</td>
+                        <td style="vertical-align: top;" class="field" colspan="2">{{ form_row(form.ubicacion) }}</td>
                         
                     </tr>
                     <tr>
@@ -42,7 +42,7 @@
                         <td colspan="2" class="field">{{ form_row(form.tipoactivo) }}</td>
                     </tr>
                         
-                  </table>
+         </table>
                     <br/>
                     <table align='center'>
                            <tr>
