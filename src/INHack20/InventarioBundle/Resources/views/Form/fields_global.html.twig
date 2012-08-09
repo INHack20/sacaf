@@ -1,21 +1,34 @@
 {% extends 'form_table_layout.html.twig' %}
-{% block form_label %}
-{% spaceless %}
-    {% if single_control %}
-        {% set label_attr = label_attr|merge({'for': id}) %}
-    {% endif %}
-    {% if required %}
-        {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
-    {% endif %}
-    <label{% for attrname,attrvalue in label_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{% autoescape false %}{{ label|trans({}, translation_domain) }}{% endautoescape %}</label>
-{% endspaceless %}
-{% endblock form_label %}
-    
+{#
+    {% block form_label %}
+    {% spaceless %}
+        {% if single_control %}
+            {% set label_attr = label_attr|merge({'for': id}) %}
+        {% endif %}
+        {% if required %}
+            {% set label_attr = label_attr|merge({'class': (label_attr.class|default('') ~ ' required')|trim}) %}
+        {% endif %}
+        <label{% for attrname,attrvalue in label_attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{% autoescape false %}{{ label|trans({}, translation_domain) }}{% endautoescape %}</label>
+    {% endspaceless %}
+    {% endblock form_label %}
+#}
 {% block generic_label %}
-{% spaceless %}
-    {% if required %}
-        {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
-    {% endif %}
-    <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{% autoescape false %}{{ label|trans }}{% endautoescape %}</label>
-{% endspaceless %}
+    {% spaceless %}
+        {% if required %}
+            {% set attr = attr|merge({'class': attr.class|default('') ~ ' required'}) %}
+        {% endif %}
+        <label{% for attrname,attrvalue in attr %} {{attrname}}="{{attrvalue}}"{% endfor %}>{% autoescape false %}{{ label|trans }}{% endautoescape %}</label>
+    {% endspaceless %}
 {% endblock %}
+
+{% block field_errors %}
+{% spaceless %}
+    {% if errors|length > 0 %}
+    <ul>
+        {% for error in errors %}
+            <li><font color="red">{{ error.messageTemplate|trans(error.messageParameters, 'validators') }}</font></li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+{% endspaceless %}
+{% endblock field_errors %}

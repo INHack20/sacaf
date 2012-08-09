@@ -206,9 +206,12 @@ class EquipoController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             
             $activo=$entity->getActivo();
-            $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
-            $activo->setTipoActivo($this->container->getParameter('ACTIVO_EQUIPO'));
             
+            $activo->setTipoActivo($this->container->getParameter('ACTIVO_EQUIPO'));
+            if($activo->getUbicacion())
+                    $activo->setEstatus($this->container->getParameter('ASIGNADO'));
+                else
+                    $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
             if($orden_id > 0){
                 $orden = $em->getRepository('INHack20InventarioBundle:Orden')->find($orden_id);
 
@@ -294,6 +297,11 @@ class EquipoController extends Controller
         $editForm->bindRequest($request);
         
         if ($editForm->isValid()) {
+            $activo = $entity->getActivo();
+            if($activo->getUbicacion())
+                    $activo->setEstatus($this->container->getParameter('ASIGNADO'));
+                else
+                    $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
             
             $em->persist($entity);
             $em->flush();

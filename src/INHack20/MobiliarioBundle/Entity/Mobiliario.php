@@ -27,6 +27,7 @@ class Mobiliario
      * @var string $codigo_catalogo
      *
      * @ORM\Column(name="codigo_catalogo", type="string", length=50)
+     * @Assert\NotBlank()
      */
     private $codigo_catalogo;
 

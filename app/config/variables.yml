@@ -1,4 +1,6 @@
 parameters:
+    #Version de la App
+    VERSION_APP: v1.0
     #Tipo de comprobantes
     COMPROBANTE_ENTREGA : 1
     COMPROBANTE_REASIGNACION : 2

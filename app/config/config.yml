@@ -25,6 +25,8 @@ twig:
     form:
       resources: ['INHack20InventarioBundle:Form:fields_global.html.twig']
     globals:
+      #Version de la App
+      VERSION_APP: %VERSION_APP%
       #Tipo de comprobantes
       COMPROBANTE_ENTREGA : %COMPROBANTE_ENTREGA%
       COMPROBANTE_REASIGNACION : %COMPROBANTE_REASIGNACION%

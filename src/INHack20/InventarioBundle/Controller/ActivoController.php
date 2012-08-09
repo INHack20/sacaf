@@ -272,7 +272,7 @@ class ActivoController extends Controller
                     'property' => 'dependencia',
                     'label'=> 'Dependencia',
                     'empty_value' => 'Seleccione',
-                    'attr' => array('style' => 'width:400px;font-size:9px'),
+                    'attr' => array('style' => 'max-width: 50%;'),
                     'query_builder' => function(\Doctrine\ORM\EntityRepository $er) use ($estado){
                         return $er->createQueryBuilder('u')
                                 ->where('u.estado = :estado')

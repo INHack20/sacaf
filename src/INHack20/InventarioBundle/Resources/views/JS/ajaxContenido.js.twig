@@ -1,9 +1,10 @@
 {#
     {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
 #}
+
 <script type="text/javascript">
    $(document).ready(function(){
-            
+      
             $(".ajaxContenido").click(function(e){
                         e.preventDefault();
                             cargando();
@@ -19,5 +20,5 @@
                                 listoCargado();
                              });
                     });
-    });
+      });
 </script>

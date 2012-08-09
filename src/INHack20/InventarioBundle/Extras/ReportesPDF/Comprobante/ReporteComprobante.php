@@ -49,7 +49,7 @@ class ReporteComprobante {
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
         //set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, 95, PDF_MARGIN_RIGHT);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, 123, PDF_MARGIN_RIGHT);
         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -65,7 +65,7 @@ class ReporteComprobante {
         // ---------------------------------------------------------
 
         // set font
-        $pdf->SetFont('times', 'B', 5);
+        $pdf->SetFont('times', 'B', 7   );
 
         // add a page
         $pdf->AddPage();
@@ -177,10 +177,7 @@ class Reporte extends \Tcpdf_Tcpdf {
                 $image_file = 'bundles/inhack20inventario/images/emblema1.jpg';
 		//$this->Image($image_file, 10, 10, 15, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
 		// Set font
-		$this->SetFont('times', 'B', 5);
-		// Title
-		//$this->Cell(0, 0, '<< TCPDF Example 003 >>SSS', 1, 0, 'L', 0, '', 0, false, 'M', 'M');
-        
+		$this->SetFont('times', 'B', 7);     
         
         //CABECERA
         $html= '
@@ -348,7 +345,7 @@ class Reporte extends \Tcpdf_Tcpdf {
 		// Position at 15 mm from bottom
 		$this->SetY(-32);
 		// Set font
-		$this->SetFont('times', 'B', 5);
+		$this->SetFont('times', 'B', 7);
 		// Page number
 		//$this->Cell(0, 10, ''.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
         

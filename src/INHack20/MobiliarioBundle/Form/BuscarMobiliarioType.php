@@ -51,6 +51,9 @@ class BuscarMobiliarioType  extends AbstractType{
                  'attr' => array('rows' => '3', 'cols' => '50'),
                  'required' => false,
              ))
+             ->add('accion','hidden',array(
+                 'data' => '1'
+             ))
          ;
     }
 

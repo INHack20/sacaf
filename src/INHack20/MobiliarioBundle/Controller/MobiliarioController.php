@@ -48,6 +48,7 @@ class MobiliarioController extends Controller
                 if($form_buscar->isValid())
                 {
                     $data=$form_buscar->getData();
+                    $accion = $data['accion'];
                     //Valido si algun campo tiene datos de busqueda
                     if($data!="" || $data['fecha']!='' || $data['ubicacion']!="" || $data['nrobiennacional'!=''] || $data['descripcion']!='')
                     
@@ -194,9 +195,11 @@ class MobiliarioController extends Controller
             $em = $this->getDoctrine()->getEntityManager();
             
             $activo=$entity->getActivo();
-            $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
             $activo->setTipoActivo($this->container->getParameter('ACTIVO_MOBILIARIO'));
-            
+            if($activo->getUbicacion())
+                    $activo->setEstatus($this->container->getParameter('ASIGNADO'));
+                else
+                    $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
             if($orden_id > 0){
                 $orden = $em->getRepository('INHack20InventarioBundle:Orden')->find($orden_id);
 
@@ -213,7 +216,7 @@ class MobiliarioController extends Controller
                     return $this->render('INHack20MobiliarioBundle:Mobiliario:lista_mobiliarios.html.twig', array('entities' => $orden->getActivos(),'orden_id' => $orden_id));
                 }
                 else
-                    return $this->forward('INHack20InventarioBundle:Mobiliario:show', array('id' => $entity->getId()));
+                    return $this->forward('INHack20MobiliarioBundle:Mobiliario:show', array('id' => $entity->getId()));
             }
             else
                 return $this->redirect($this->generateUrl('mobiliario_show',array('id' => $entity->getId())));
@@ -280,6 +283,12 @@ class MobiliarioController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            $activo = $entity->getActivo();
+            if($activo->getUbicacion())
+                    $activo->setEstatus($this->container->getParameter('ASIGNADO'));
+                else
+                    $activo->setEstatus($this->container->getParameter('STOCK_ALMACEN'));
+            
             $em->persist($entity);
             $em->flush();
             

@@ -17,6 +17,14 @@ class ActivoType extends AbstractType
                 'label' => 'Observaci&oacute;n',
                 'attr' => array('rows' => '5', 'cols' => '30'),
                 ))
+            ->add('ubicacion','entity',array(
+                    'label' => 'Ubicaci&oacute;n',
+                    'class' => 'INHack20\InventarioBundle\Entity\Ubicacion',
+                    'property' => 'dependencia',
+                    'empty_value' => 'Ninguna',
+                    'attr' => array('style' => 'max-width:40%;font-size:10px'),
+                    'required' => false,
+                ))
             //->add('orden')
             //->add('estatus')
             //->add('estado')

@@ -67,7 +67,7 @@ class ReporteInventario{
         $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
         //set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, 36, PDF_MARGIN_RIGHT);
+        $pdf->SetMargins(PDF_MARGIN_LEFT, 42, PDF_MARGIN_RIGHT);
         $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
         $pdf->SetFooterMargin(20);
 
@@ -90,25 +90,26 @@ class ReporteInventario{
 
         // set some text to print
         
-        $pdf->SetFont('times', 'B', 5);
+        $pdf->SetFont('times', 'B', 8);
 
         // -----------------------------------------------------------------------------    
-
+        /*
         $html= '
-        <table border="1">
-        <tr>
-            <td colspan="3" align="center" width="15%" bgcolor="#CCCCCC">CLASIFICACI&Oacute;N</td>
-            <td rowspan="2" align="center" width="5%" bgcolor="#CCCCCC">N&deg; ID</td>
-            <td rowspan="2" align="center" width="72%" bgcolor="#CCCCCC">DESCRIPCI&Oacute;N DE LOS BIENES</td>
-            <td rowspan="2" align="center" width="8%" bgcolor="#CCCCCC">VALOR UNITARIO (BSF)</td>
-        </tr>
-        <tr>
-            <td align="center" width="5%" bgcolor="#CCCCCC">GRUPO</td>
-            <td align="center" width="5%" bgcolor="#CCCCCC">SUB GRUPO</td>
-            <td align="center" width="5%" bgcolor="#CCCCCC">SECCION</td>
-        </tr>
-        ';
-        
+            <table border="1">
+                <tr>
+                    <td colspan="3" align="center" width="15%" bgcolor="#CCCCCC">CLASIFICACI&Oacute;N</td>
+                    <td rowspan="2" align="center" width="5%" bgcolor="#CCCCCC">N&deg; ID</td>
+                    <td rowspan="2" align="center" width="70%" bgcolor="#CCCCCC">DESCRIPCI&Oacute;N DE LOS BIENES</td>
+                    <td rowspan="2" align="center" width="10%" bgcolor="#CCCCCC">VALOR UNITARIO (BSF)</td>
+                </tr>
+                <tr>
+                    <td align="center" width="5%" bgcolor="#CCCCCC">GRUPO</td>
+                    <td align="center" width="5%" bgcolor="#CCCCCC">SUB GRUPO</td>
+                    <td align="center" width="5%" bgcolor="#CCCCCC">SECCION</td>
+                </tr>
+            </table>
+            ';
+        */
         $html= '<table border="1">';
             if($tipoActivo==$container->getParameter('ACTIVO_MOBILIARIO'))
             {
@@ -130,8 +131,8 @@ class ReporteInventario{
                             <td align="center" width="5%">01</td>
                             <td align="center" width="5%">0</td>
                             <td align="center" width="5%">'.$v[0].'</td>
-                            <td align="left" width="72%">&nbsp;&nbsp;'.$v[1].'</td>
-                            <td align="center" width="8%">'.$v[2].'</td>
+                            <td align="left" width="70%">&nbsp;&nbsp;'.$v[1].'</td>
+                            <td align="center" width="10%">'.$v[2].'</td>
                         </tr>
                         ';
                     }
@@ -276,7 +277,7 @@ class Inventario extends \Tcpdf_Tcpdf {
 	public function Header() {
 		// Logo
                 $image_file = 'bundles/inhack20inventario/images/logo_tsj.jpg';
-		$this->SetFont('times', 'B', 5);
+		$this->SetFont('times', 'B', 6);
 		// -----------------------------------------------------------------------------    
 
                 $html= '
@@ -321,8 +322,8 @@ class Inventario extends \Tcpdf_Tcpdf {
                     <tr>
                         <td colspan="3" align="center" width="15%" bgcolor="#CCCCCC">CLASIFICACI&Oacute;N</td>
                         <td rowspan="2" align="center" width="5%" bgcolor="#CCCCCC"><br/><br/>N&deg; ID</td>
-                        <td rowspan="2" align="center" width="72%" bgcolor="#CCCCCC"><br/><br/>DESCRIPCI&Oacute;N DE LOS BIENES</td>
-                        <td rowspan="2" align="center" width="8%" bgcolor="#CCCCCC">VALOR UNITARIO (BSF)</td>
+                        <td rowspan="2" align="center" width="70%" bgcolor="#CCCCCC"><br/><br/>DESCRIPCI&Oacute;N DE LOS BIENES</td>
+                        <td rowspan="2" align="center" width="10%" bgcolor="#CCCCCC">VALOR UNITARIO (BSF)</td>
                     </tr>
                     <tr>
                         <td align="center" width="5%" bgcolor="#CCCCCC">GRUPO</td>

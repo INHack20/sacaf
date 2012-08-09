@@ -39,7 +39,6 @@
 <script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.form.js") }}"></script>
 <script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.validate.js") }}"></script>
 <script type="text/javascript" src="{{ asset("bundles/inhack20inventario/js/jquery.autocomplete.js") }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 
 
 <!-- Calendario -->
@@ -117,7 +116,7 @@
 
         </style>
         <script type="text/javascript">
-                $(function() {
+                $(document).ready(function() {
                         // a workaround for a flaw in the demo system (http://dev.jqueryui.com/ticket/4375), ignore!
                         $( "#dialog:ui-dialog" ).dialog( "destroy" );
                         $.fx.speeds._default = 1000;
@@ -166,7 +165,7 @@
   {% block javascripts %}{% endblock %}
   <div class="clear">&nbsp;</div>
   <div id="footer">{% block pie %}
-		<p>SACAF v1.0 Copyleft 2011-2012<br/>Desarrollado por: Br. Carlos Mendoza</p>
+		<p>SACAF {{ VERSION_APP }} Copyleft 2011-2012<br/>Desarrollado por: Br. Carlos Mendoza</p>
   {% endblock %}
   </div>
 </div>

@@ -5,7 +5,7 @@
         {% set comprobante_id = 0 %}
     {% endif %}
 {% if pager.isPaginable %}
-<table align="right"><tr><td>{{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id }) }}</td></tr></table>
+<table align="right"><tr><td>{{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id, 'accion' : accion }) }}</td></tr></table>
 <br/>
 {% endif %}
 <br/>
@@ -82,27 +82,27 @@
     </tbody>
 </table>
 {% if pager.isPaginable %}
-    {{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id }) }}
+    {{ paginate(pager,'mobiliario',{ 'estatus' : estatus, 'comprobante_id' : comprobante_id, 'accion' : accion }) }}
 {% endif %}
+{% if comprobante is defined %}
+    <script type="text/javascript">
+        $(document).ready(function(){
 
-<script type="text/javascript">
-    $(document).ready(function(){
-        {% if comprobante is defined %}
-            $(".ajaxResult-activos").click(function(e){
-                            e.preventDefault();
-                            
-                                cargando();
-                                $("#result-activos").load($(this).attr('href'),function(){
-                                    $( "#dialog-form" ).dialog( "close" );
-                                    listoCargado();
-                                });
-            });
-          {% else %}
+                $(".ajaxResult-activos").click(function(e){
+                                e.preventDefault();
+
+                                    cargando();
+                                    $("#result-activos").load($(this).attr('href'),function(){
+                                        $( "#dialog-form" ).dialog( "close" );
+                                        listoCargado();
+                                    });
+                });
+
+        });
+    </script>
+ {% else %}
                 {% include 'INHack20InventarioBundle:JS:ajaxContenido.js.twig' %}
-          {% endif %}
-    });
-</script>
-
+{% endif %}
 {% else %}
     <font color="green" size="5px">No se encontraron mobiliarios.</font>
 {% endif%}

@@ -15,7 +15,7 @@ class ComprobanteType extends AbstractType
                     'label' => 'Ubicaci&oacute;n',
                     'class' => 'INHack20\InventarioBundle\Entity\Ubicacion',
                     'property' => 'dependencia',
-                    //'attr' => array('style' => 'width:400px;font-size:9px'),
+                    'attr' => array('style' => 'max-width:50%;font-size:9px'),
                     'empty_value' => 'Seleccione',
                     'query_builder' => function(EntityRepository $er) use ($options){
                         return $er->createQueryBuilder('u')

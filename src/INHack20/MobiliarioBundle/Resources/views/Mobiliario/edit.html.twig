@@ -13,6 +13,10 @@
         <td> {{ form_label(edit_form.activo.observacion) }} {{ form_errors(edit_form.activo.observacion) }}</td>
         <td> {{ form_widget(edit_form.activo.observacion) }}</td>
     </tr>
+    <tr>
+        <td> {{ form_label(edit_form.activo.ubicacion) }} {{ form_errors(edit_form.activo.ubicacion) }}</td>
+        <td> {{ form_widget(edit_form.activo.ubicacion) }}</td>
+    </tr>
   <tr>
      <td colspan="2">
         {{ form_widget(edit_form) }}
@@ -39,7 +43,7 @@
   </tr>
 </table>
 <br/><br/>
- <form id="frmEliminar" action="{{ path('mobiliario_delete', { 'id': entity.id, 'orden_id' : orden_id }) }}" method="post">
+ <form id="frmEliminar" action="{{ path('mobiliario_delete', { 'id': entity.id, 'orden_id' : orden_id, 'comprobante_id' : 0 }) }}" method="post">
                     {{ form_widget(delete_form) }}
 </form>
 
