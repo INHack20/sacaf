@@ -30,8 +30,7 @@ php app/check.php desde una terminal o visitando la pagina web/config.php
 	php app/console doctrine:fixtures:load
 	php app/console assets:install web
 
-### 5) Ingresar al navegador e ingresar a la carpeta de la aplicacion, alli debe entrar a la direccion web/app.php para ingresar en
-el entorno de produccion (para el entordo de desarrollo ingresar en web/app_dev.php).
+### 5) Ingresar al navegador e ingresar a la carpeta de la aplicacion, alli debe entrar a la direccion web/app.php para ingresar en el entorno de produccion (para el entordo de desarrollo ingresar en web/app_dev.php).
 
 ### 6) Al cargar los fixtures se crea un usuario predeterminado en la base de datos con las siguientes credenciales:
 	Nombre de Usuario: admin
